@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Sportify: Consultation Sportive</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #wrapper {
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            background-color: #76D2FF;
+        }
+        #header h1 {
+            margin: 0;
+            text-align: center;
+            font-family: fantasy;
+            font-style: italic;
+            padding-left: 10px;
+        }
+        #navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            background-color: #76D2FF;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        #navigation1, #navigation2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #navigation1 a {
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #E0E0E0;
+            color: black;
+            border: 2px solid #808080;
+        }
+        #navigation a:hover {
+            background-color: #D0D0D0;
+        }
+
+        .custom-select-wrapper {
+            position: relative;
+            display: inline-block;
+            user-select: none;
+        }
+        .custom-select {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            appearance: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #808080;
+            background-color: #E0E0E0;
+            color: black;
+            cursor: pointer;
+            position: relative;
+        }
+        .custom-select:after {
+            content: '\25BE'; /* flèche vers le bas */
+            font-size: 16px;
+            margin-left: 5px;
+        }
+        .custom-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            border: 2px solid #808080;
+            background-color: #E0E0E0;
+        }
+        .custom-options.active {
+            display: block;
+        }
+        .custom-option {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .custom-option:hover {
+            background-color: #D0D0D0;
+        }
+
+        #section {
+            padding: 20px;
+        }
+        #footer {
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid #ccc;
+            background-color: #76D2FF;
+        }
+        .welcome {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .event, .bulletin {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #F0F0F2;
+        }
+        .match {
+            text-align: center;
+            padding: 10px 0;
+            background-image: url('foot.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .carousel {
+            margin: 20px 0;
+        }
+        .carousel img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-bar input[type="text"] {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .search-bar button {
+            padding: 5px 10px;
+            font-size: 16px;
+            background-color: #E0E0E0;
+            border: 2px solid #808080;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #D0D0D0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+        }
+        .pave {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <img src="logo.png" alt="Logo" style="height: 100px; text-align: center;">
+        </div>
+        <div id="navigation">
+            <div id="navigation1">
+                <a href="#" onclick="showSection('home')">Accueil</a>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select" onclick="toggleOptions()">Tout parcourir</div>
+                    <div class="custom-options">
+                        <div class="custom-option" onclick="showSection('sports'); loadCoaches()">Activités sportives</div>
+                        <div class="custom-option" onclick="showSection('competitive')">Sports compétition</div>
+                        <div class="custom-option" onclick="showSection('gym')">Salle de sport</div>
+                    </div>
+                </div>
+                <a href="#" onclick="showSection('appointment')">Rendez-vous</a>
+            </div>
+            <div id="navigation2">
+                <a href="#" onclick="showSection('account')"><img src="util.png" alt="Votre Compte" style="height: 40px;"></a>
+                <div class="search-bar">
+                    <form id="myForm" method="post">
+                        <input type="text" name="recherche" placeholder="Rechercher...">
+                        <button type="submit" name="button1" value="Rechercher" onclick="rechercher()">Rechercher</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="section">
+            <div id="recherche"></div>
+
+            <div id="acccount">
+                <div class="container">
+                    <div class="pave">
+                        <form id="myFormco">
+                            <table>
+                                <tr>
+                                    <td colspan="2" align="center">Administrateur</td>
+                                </tr>
+                                <tr>
+                                    <td>Nom :</td>
+                                    <td><input type="text" name="adminnom"></td>
+                                </tr>
+                                <tr>
+                                    <td>Prénom :</td>
+                                    <td><input type="text" name="adminprenom"></td>
+                                </tr>
+                                <tr>
+                                    <td>Courriel :</td>
+                                    <td><input type="text" name="adminmail"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <input type="submit" name="buttonco" value="Valider">
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+                    </div>
+                    <div class="pave">
+                        <form id="myFormco">
+                            <table>
+                                <tr>
+                                    <td colspan="2" align="center">Coach</td>
+                                </tr>
+                                <tr>
+                                    <td>Nom :</td>
+                                    <td><input type="text" name="coachnom"></td>
+                                </tr>
+                                <tr>
+                                    <td>Prénom :</td>
+                                    <td><input type="text" name="coachprenom"></td>
+                                </tr>
+                                <tr>
+                                    <td>Courriel :</td>
+                                    <td><input type="text" name="coachmail"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <input type="submit" name="buttonco" value="Valider">
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+                    </div>
+                    <div class="pave">
+                        <form id="myFormco">
+                            <table>
+                                <tr>
+                                    <td colspan="2" align="center">Client</td>
+                                </tr>
+                                <tr>
+                                    <td>Nom :</td>
+                                    <td><input type="text" name="clientnom"></td>
+                                </tr>
+                                <tr>
+                                    <td>Prénom :</td>
+                                    <td><input type="text" name="clientprenom"></td>
+                                </tr>
+                                <tr>
+                                    <td>Adresse :</td>
+                                    <td><input type="text" name="clientadresse"></td>
+                                </tr>
+                                <tr>
+                                    <td>Courriel :</td>
+                                    <td><input type="text" name="clientmail"></td>
+                                </tr>
+                                <tr>
+                                    <td>Carte étudiante :</td>
+                                    <td><input type="number" name="clientcarteEtudiante"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <input type="submit" name="buttonco" value="Valider">
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="home" class="content">
+                <div class="welcome">
+                    <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
+                </div>
+                <div class="event">
+                    <h2>Évènement de la semaine</h2>
+                    <p>Ne manquez pas notre match! Le classico des post-bac!</p>
+                    <div class="match">
+                        <img src="ece.png" alt="ECE Logo">
+                        <img src="vs.png" alt="vs">
+                        <img src="esilv.png" alt="ESILV Logo">
+                    </div>
+                </div>
+                <div class="carousel">
+                    <img src="specialist1.jpg" alt="Specialist 1">
+                    <img src="specialist2.jpg" alt="Specialist 2">
+                    <img src="specialist3.jpg" alt="Specialist 3">
+                </div>
+            </div>
+            <div id="sports" class="content hidden">
+                <h3>Activités sportives</h3>
+                <ul>
+                    <li>Musculation</li>
+                    <li>Fitness</li>
+                    <li>Biking</li>
+                    <li>Cardio-Training</li>
+                    <li>Cours Collectifs</li>
+                </ul>
+                
+                <div id="coaches_AS">
+                    <!--Affichages des coaches via le fichier affichagecoach.php-->
+                </div>
+            </div>
+            <div id="competitive" class="content hidden">
+                <h3>Les Sports de compétition</h3>
+                <ul>
+                    <li>Basketball</li>
+                    <li>Football</li>
+                    <li>Rugby</li>
+                    <li>Tennis</li>
+                    <li>Natation</li>
+                    <li>Plongeon</li>
+                </ul>
+                <p>Responsable: Coach Marie</p>
+                <p>Nom: Marie Dubois</p>
+                <p>Photo: <img src="marie.jpg" alt="Marie Dubois" width="100"></p>
+                <p>Bureau: Salle 102</p>
+                <p>Disponibilité: Mardi - Samedi</p>
+                <p>CV: <a href="marie_cv.pdf" target="_blank">Télécharger le CV</a></p>
+            </div>
+            <div id="gym" class="content hidden">
+                <h3>Salle de sport Omnes</h3>
+                <p>Services disponibles:</p>
+                <ul>
+                    <li>Règles sur l'utilisation des machines</li>
+                    <li>Horaire de la gym</li>
+                    <li>Questionnaires pour les nouveaux utilisateurs</li>
+                </ul>
+                <p>Responsable: Coach Paul</p>
+                <p>Nom: Paul Martin</p>
+                <p>Photo: <img src="paul.jpg" alt="Paul Martin" width="100"></p>
+                <p>Bureau: Salle 103</p>
+                <p>Disponibilité: Mercredi - Dimanche</p>
+                <p>CV: <a href="paul_cv.pdf" target="_blank">Télécharger le CV</a></p>
+            </div>
+        </div>
+        <div id="footer">
+            <p>Contactez-nous: contact@sportify.fr | Téléphone: 0169696969</p>
+            <p>Adresse: 22 Av. Paul Doumer, 92500 Rueil-Malmaison, France</p>
+            <div id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d882.3198584258157!2d2.1902313500064885!3d48.8832418762505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDjCsDUzJzAwLjQiTiAywrAxMScyNC4zIkU!5e0!3m2!1sfr!2sfr!4v1716798848415!5m2!1sfr!2sfr" width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showSection(section) {
+            const sections = document.querySelectorAll('.content');
+            sections.forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(section).classList.remove('hidden');
+
+            const select = document.querySelector('.custom-select');
+            const options = ['sports', 'competitive', 'gym'];
+
+            // Réinitialise le sélecteur si la section affichée n'est pas une des options
+            if (!options.includes(section)) {
+                select.textContent = 'Tout parcourir';
+            }
+        }
+
+        function toggleOptions() {
+            const options = document.querySelector('.custom-options');
+            options.classList.toggle('active');
+        }
+
+        function selectOption(option, section) {
+            const select = document.querySelector('.custom-select');
+            select.textContent = option.textContent;
+            showSection(section);
+            toggleOptions();
+        }
+
+        document.querySelectorAll('.custom-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const section = option.getAttribute('onclick').match(/'(\w+)'/)[1];
+                selectOption(option, section);
+            });
+        });
+
+        $(document).ready(function() {
+            $('#myForm').on('submit', function(event) {
+                event.preventDefault(); // Empêche le formulaire de soumettre normalement
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'recherche.php',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#recherche').html(response);
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('#myFormco').on('submit', function(event) {
+                event.preventDefault(); // Empêche le formulaire de soumettre normalement
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'connexion.php',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#account').html(response);
+                    }
+                });
+            });
+        });
+
+        function loadCoaches() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'affichagecoach.php', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById('coaches_AS').innerHTML = xhr.responseText;
+                } else {
+                    console.error('Une erreur est survenue lors du chargement des coachs.');
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

@@ -6,9 +6,6 @@
     $choice = isset($_POST["button1"]) ? $_POST["button1"] : "";
     
     $recherche = isset($_POST["recherche"]) ? $_POST["recherche"] : "";
-    
-    echo "mot ". $recherche . "<br>";
-    echo "recherche ". $choice;
     if ($db_found) {
         $erreur = false;
         $errorMessage = "";
@@ -25,10 +22,6 @@
         }
         
         if (!$erreur) {
-            echo "<h1>Résultat</h1>";
-            echo "<p>Requete: " . $sql . "<br>";
-            echo "Résultat: </p>";
-
             $result = mysqli_query($db_handle, $sql);
             echo "<table border=\"1\">";
             echo "<tr>";

@@ -1,0 +1,146 @@
+-- Supprimer la base de données si elle existe déjà
+DROP DATABASE IF EXISTS sportify;
+
+-- Créer la base de données
+CREATE DATABASE sportify;
+
+-- Utiliser la base de données
+USE sportify ;
+
+DROP TABLE IF EXISTS coaches ;
+DROP TABLE IF EXISTS clients ;
+DROP TABLE IF EXISTS admins ;
+DROP TABLE IF EXISTS respos ;
+DROP TABLE IF EXISTS paiements ;
+DROP TABLE IF EXISTS salles ;
+DROP TABLE IF EXISTS rdv ;
+DROP TABLE IF EXISTS messages ;
+
+
+-- Créer la table coaches
+CREATE TABLE coaches(
+idcoach INT AUTO_INCREMENT PRIMARY KEY,
+nom VARCHAR(20),
+prenom VARCHAR(20),
+specialite VARCHAR(20),
+mail VARCHAR(50),
+num_salle VARCHAR(20),
+tel Numeric(11),
+photo VARCHAR(20),
+cv VARCHAR(20)
+);
+
+-- Créer la table salles
+CREATE TABLE salles(
+numsalle VARCHAR(20) PRIMARY KEY,
+adressesalle VARCHAR(50),
+mailsalle VARCHAR(20),
+photosalle VARCHAR(20),
+telsalle Numeric(11),
+horairesalle VARCHAR(20)
+);
+
+-- Créer la table clients
+CREATE TABLE clients(
+idclient INT AUTO_INCREMENT PRIMARY KEY,
+nomclient VARCHAR(20),
+prenomclient VARCHAR(20),
+emailclient VARCHAR(50),
+adresseclient VARCHAR(50),
+carteEtudiante Numeric(4)
+);
+
+-- Créer la table paiements
+CREATE TABLE paiements(
+idclient INT(6) PRIMARY KEY,
+nom VARCHAR(20),
+prenom VARCHAR(20),
+email VARCHAR(50),
+adresse1 VARCHAR(50),
+adresse2 VARCHAR(50),
+ville VARCHAR(20),
+pays VARCHAR(20),
+tel Numeric(11),
+typecarte VARCHAR(20),
+numcarte Numeric(16),
+nomcrate VARCHAR(20),
+dateexp DATE,
+codesecu INT(4)
+);
+
+-- Créer la table rdv
+CREATE TABLE rdv(
+idrdv INT AUTO_INCREMENT PRIMARY KEY,
+idclient INT(6),
+idcoach INT(6),
+horaire TIME(3),
+jour DATE,
+salle VARCHAR(20)
+);
+
+-- Créer la table admins
+CREATE TABLE admins (
+idadmin INT(6) PRIMARY KEY,
+nom VARCHAR(20),
+prenom VARCHAR(20),
+email VARCHAR(50)
+);
+
+-- Créer la table respos
+CREATE TABLE respos (
+idrespo INT(6) PRIMARY KEY,
+salle VARCHAR(20),
+nom VARCHAR(20),
+prenom VARCHAR(20),
+email VARCHAR(50),
+tel Numeric(11)
+);
+
+CREATE TABLE messages (
+idmessage INT AUTO_INCREMENT PRIMARY KEY,
+text TEXT,
+idexpediteur INT(6),
+idreceveur INT(6),
+temps TIME,
+jour DATE,
+);
+
+
+
+INSERT INTO coaches (nom, prenom, specialite, mail, num_salle, tel, photo)
+VALUES
+('Klinger', 'Julien', 'Tennis', 'julien.klinger@sportify.com', 'C-001', 0641490230, 'julien.png'), ('Urvoy', 'Mathis', 'Basket', 'mathis.urvoy@sportify.com', 'C-002', 0714212835, 'mathis.png'), ('Chevalier', 'Alice', 'Cardio-Training', 'alice.chevalier@sporify.com', 'C-003', 0624144988, 'alice.png'),
+('Baudy', 'Benjamin', 'Biking', 'benjamin.baudy@sportify.com', 'C-004', 0616243240, 'benjamin.png'),
+('Wyka', 'Martin', 'Musculation', 'martin.wyka@sportify.com', 'C-005', 0659500718, 'martin.png'),
+('Hoang', 'Laura', 'Fitness', 'laura.hoang@sportify.com', 'C-006', 0716506930, 'laura.png'),
+('Auxfraises', 'Charlotte', 'Cours collectifs', 'charlotte.auxfraises@sportify.com', 'C-007', 0654128376, 'charlotte.png'),
+('Jaccod', 'Bastien', 'Football', 'bastien.jaccod@sportify.com', 'C-008', 0688542764, 'bastien.png'),
+('Romeo', 'Alexandre', 'Natation', 'alexandre.romeo@sportify.com', 'C-009', 0640826635, 'alexandre.png'),
+('Migan', 'Aude', 'Plongeon', 'aude.migan@sportify.com', 'C-010', 0784305935, 'aude.png'),
+('Berteau', 'Pierre', 'Rugby', 'pierre.berteau@sportify.com', 'C-011', 0650403087, 'pierre.png');
+
+INSERT INTO clients (nomclient, prenomclient, emailclient, adresseclient, carteEtudiante)
+VALUES ('Drauchon', 'Paul', 'paul.drochon@sportify.com', '30 rue Moliere', 0001),
+('Rossi', 'Elara', 'elara.rossi@sportify.com', '42 Rue de Rivoli, Paris', 0002),
+('Nielsen', 'Kael', 'kael.nielsen@sportify.com', '77 Boulevard Saint-Germain, Paris', 0003),
+('Petrov', 'Lyra', 'lyra.petrov@sportify.com', '13 Rue de la Paix, Paris', 0004),
+('Dumont', 'Thorin', 'thorin.dumont@sportify.com', '88 Avenue Montaigne, Paris', 0005),
+('Novák', 'Nova', 'nova.novak@sportify.com', '5 Rue du Faubourg Saint-Honoré, Paris', 0006),
+('Schmidt', 'Fenris', 'fenris.schmidt@sportify.com', '22 Rue Saint-Dominique, Paris', 0007),
+('Varga', 'Sylvan', 'sylvan.varga@sportify.com', '9 Rue de Vaugirard, Paris', 0008),
+('Larsen', 'Aria', 'aria.larsen@sportify.com', '33 Rue La Fayette, Paris', 0009),
+('Iversen', 'Draven', 'draven.iversen@sportify.com', '66 Avenue de la Grande Armée, Paris', 0010),
+('Hoffmann', 'Aurion', 'aurion.hoffmann@sportify.com', '1 Avenue des Champs-Élysées, Paris', 0011);
+
+INSERT INTO admins (idadmin, nom, prenom, email)
+VALUES (1, 'Farigoul', 'Alexia', 'alexia.farigoul@sportify.com'),
+(2, 'Wyka', 'Martin', 'martin.wyka@sportify.com'),
+(3, 'Nkengoue', 'Brooklyn', 'brooklyn.nkengoue@sportify.com'),
+(4, 'Puel', 'Thibaut', 'thibaut.puel@sportify.com');
+
+INSERT INTO respos (idrespo, salle, nom, prenom, email, tel)
+VALUES
+(1, 'C-001', 'Bricout', 'Théodore', 'theodore.bricout@sportify.com', 0633432681),
+(2, 'C-002', 'Siritham', 'Evan', 'evan.siritham@sportify.com', 0654424874),
+(3, 'C-003', 'Quaranta', 'Benoit', 'benoit.quaranta@sportify.com', 0646511873),
+(4, 'C-004', 'Petit', 'Laure', 'laure.petit@sportify.com', 0745426884);

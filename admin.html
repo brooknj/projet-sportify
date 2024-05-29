@@ -51,51 +51,6 @@
         #navigation a:hover {
             background-color: #D0D0D0;
         }
-
-        .custom-select-wrapper {
-            position: relative;
-            display: inline-block;
-            user-select: none;
-        }
-        .custom-select {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            appearance: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: 2px solid #808080;
-            background-color: #E0E0E0;
-            color: black;
-            cursor: pointer;
-            position: relative;
-        }
-        .custom-select:after {
-            content: '\25BE'; /* flèche vers le bas */
-            font-size: 16px;
-            margin-left: 5px;
-        }
-        .custom-options {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            border: 2px solid #808080;
-            background-color: #E0E0E0;
-        }
-        .custom-options.active {
-            display: block;
-        }
-        .custom-option {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .custom-option:hover {
-            background-color: #D0D0D0;
-        }
-
         #section {
             padding: 20px;
         }
@@ -120,9 +75,6 @@
         .equipe {
             text-align: center;
             padding: 10px 0;
-        }
-        .carousel {
-            margin: 20px 0;
         }
         .carousel img {
             width: 100%;
@@ -152,18 +104,6 @@
         .search-bar button:hover {
             background-color: #D0D0D0;
         }
-        .container {
-            display: flex;
-            justify-content: space-around;
-            width: 80%;
-        }
-        .pave {
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -183,15 +123,15 @@
     <div id="navigation">
         <div id="navigation1">
             <a onclick="showSection('home')">Accueil</a>
-            <a onclick="showSection('clientadmin')">Clients</a>
-            <a onclick="showSection('coachadmin')">Coachs</a>
+            <a onclick="showSection('clients')">Clients</a>
+            <a onclick="showSection('coachs')">Coachs</a>
         </div>
         <div id="navigation2">
             <a onclick="showSection('account')"><img src="admin.png" alt="Votre Compte" style="height: 40px;"></a>
             <div class="search-bar">
                 <form id="myForm" method="post">
                     <input type="text" name="recherche" placeholder="Rechercher...">
-                    <button type="submit" name="button1" value="Rechercher" onclick="rechercher()">Rechercher</button>
+                    <button type="submit" name="button1" value="Rechercher">Rechercher</button>
                 </form>
             </div>
         </div>
@@ -212,114 +152,7 @@
                 </div>
             </div>
         </div>
-        <div id="account" class="content hidden">
-            <div id="acccount" class="container">
-                <div class="pave">
-                    <form id="myFormco">
-                        <table>
-                            <tr>
-                                <td colspan="2" align="center">Se connecter</td>
-                            </tr>
-                            <tr>
-                                <td>Nom :</td>
-                                <td><input type="text" name="nom"></td>
-                            </tr>
-                            <tr>
-                                <td>Prénom :</td>
-                                <td><input type="text" name="prenom"></td>
-                            </tr>
-                            <tr>
-                                <td>Adresse :</td>
-                                <td><input type="text" name="adresse"></td>
-                            </tr>
-                            <tr>
-                                <td>Courriel :</td>
-                                <td><input type="text" name="mail"></td>
-                            </tr>
-                            <tr>
-                                <td>Carte étudiante :</td>
-                                <td><input type="password" name="carteEtudiante" id="carteEtudiante"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    <input type="submit" name="buttonco" value="Valider">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    <button type="button" onclick="showSection('createAccount')">Créer un compte</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="createAccount" class="content hidden">
-            <div class="container">
-                <div class="pave">
-                    <form id="myFormCreateAccount">
-                        <table>
-                            <tr>
-                                <td colspan="2" align="center">Créer un compte</td>
-                            </tr>
-                            <tr>
-                                <td>Nom :</td>
-                                <td><input type="text" name="nom"></td>
-                            </tr>
-                            <tr>
-                                <td>Prénom :</td>
-                                <td><input type="text" name="prenom"></td>
-                            </tr>
-                            <tr>
-                                <td>Adresse :</td>
-                                <td><input type="text" name="adresse"></td>
-                            </tr>
-                            <tr>
-                                <td>Courriel :</td>
-                                <td><input type="text" name="mail"></td>
-                            </tr>
-                            <tr>
-                                <td>Carte étudiante :</td>
-                                <td><input type="password" name="carteEtudiante"></td>
-                            </tr>
-                            <tr>
-                                <td>Numéro de téléphone :</td>
-                                <td><input type="text" name="telephone"></td>
-                            </tr>
-                            <tr>
-                                <td>Mot de passe :</td>
-                                <td><input type="password" name="password"></td>
-                            </tr>
-                            <tr>
-                                <td>Confirmer le mot de passe :</td>
-                                <td><input type="password" name="confirmPassword"></td>
-                            </tr>
-                            <tr>
-                                <td>Sexe :</td>
-                                <td>
-                                    <select name="sexe">
-                                        <option value="Homme">Homme</option>
-                                        <option value="Femme">Femme</option>
-                                        <option value="Autre">Autre</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Date de naissance :</td>
-                                <td><input type="date" name="dateNaissance"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    <input type="submit" name="buttonCreateAccount" value="Créer le compte">
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="sports" class="content hidden">
+        <div id="clients" class="content hidden">
             <h3>Activités sportives</h3>
             <ul>
                 <li>Musculation</li>
@@ -333,22 +166,8 @@
                 <!--Affichages des coaches via le fichier affichagecoach.php-->
             </div>
         </div>
-        <div id="competitive" class="content hidden">
-            <h3>Les Sports de compétition</h3>
-            <ul>
-                <li>Basketball</li>
-                <li>Football</li>
-                <li>Rugby</li>
-                <li>Tennis</li>
-                <li>Natation</li>
-                <li>Plongeon</li>
-            </ul>
-            <p>Responsable: Coach Marie</p>
-            <p>Nom: Marie Dubois</p>
-            <p>Photo: <img src="marie.jpg" alt="Marie Dubois" width="100"></p>
-            <p>Bureau: Salle 102</p>
-            <p>Disponibilité: Mardi - Samedi</p>
-            <p>CV: <a href="marie_cv.pdf" target="_blank">Télécharger le CV</a></p>
+        <div id="coachs" class="content hidden">
+            <!-- Contenu des coachs sera ici -->
         </div>
         <div id="gym" class="content hidden">
             <h3>Salle de sport Omnes</h3>
@@ -380,33 +199,39 @@
         sections.forEach(sec => sec.classList.add('hidden'));
         document.getElementById(section).classList.remove('hidden');
 
-        const select = document.querySelector('.custom-select');
-        const options = ['sports', 'competitive', 'gym'];
+        // Réinitialiser les résultats de recherche et le formulaire de recherche si on navigue vers une autre section que searchResults
+        if (section !== 'searchResults') {
+            resetSearchResults();
+            resetSearchForm();
+        }
 
-        // Réinitialise le sélecteur si la section affichée n'est pas une des options
-        if (!options.includes(section)) {
-            select.textContent = 'Tout parcourir';
+        // Charger les coachs si on affiche la section coachs
+        if (section === 'coachs') {
+            fetchCoaches();
         }
     }
 
-    function toggleOptions() {
-        const options = document.querySelector('.custom-options');
-        options.classList.toggle('active');
+    function resetSearchResults() {
+        document.getElementById('recherche').innerHTML = '';
     }
 
-    function selectOption(option, section) {
-        const select = document.querySelector('.custom-select');
-        select.textContent = option.textContent;
-        showSection(section);
-        toggleOptions();
+    function resetSearchForm() {
+        document.getElementById('myForm').reset();
     }
 
-    document.querySelectorAll('.custom-option').forEach(option => {
-        option.addEventListener('click', () => {
-            const section = option.getAttribute('onclick').match(/'(\w+)'/)[1];
-            selectOption(option, section);
+    function fetchCoaches() {
+        $.ajax({
+            type: 'POST',
+            url: 'recherche.php',
+            data: { recherche: '' }, // Envoi une requête de recherche vide pour obtenir tous les coachs
+            success: function(response) {
+                $('#coachs').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
         });
-    });
+    }
 
     $(document).ready(function() {
         $('#myForm').on('submit', function(event) {
@@ -418,59 +243,30 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     $('#recherche').html(response);
+                    showSection('searchResults'); // Afficher la section des résultats de recherche
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
                 }
             });
         });
-    });
 
-    $(document).ready(function() {
         $('#myFormco').on('submit', function(event) {
             event.preventDefault(); // Empêche le formulaire de soumettre normalement
-
-            const carteEtudiante = $('#carteEtudiante').val();
-            if (carteEtudiante === '43757') {
-                window.location.href = 'admin.html';
-                return;
-            }
 
             $.ajax({
                 type: 'POST',
                 url: 'connexion.php',
                 data: $(this).serialize(),
                 success: function(response) {
-                    $('#account').html(response);
+                    console.log('Connexion réussie');
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
                 }
             });
         });
     });
-
-    $(document).ready(function() {
-        $('#myFormCreateAccount').on('submit', function(event) {
-            event.preventDefault(); // Empêche le formulaire de soumettre normalement
-
-            $.ajax({
-                type: 'POST',
-                url: 'creationcompte.php',
-                data: $(this).serialize(),
-                success: function(response) {
-                    alert('Compte créé avec succès');
-                }
-            });
-        });
-    });
-
-    function loadCoaches() {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'affichagecoach.php', true);
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                document.getElementById('coaches_AS').innerHTML = xhr.responseText;
-            } else {
-                console.error('Une erreur est survenue lors du chargement des coachs.');
-            }
-        };
-        xhr.send();
-    }
 </script>
 </body>
 </html>

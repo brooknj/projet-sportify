@@ -128,12 +128,6 @@
         </div>
         <div id="navigation2">
             <a onclick="showSection('account')"><img src="admin.png" alt="Votre Compte" style="height: 40px;"></a>
-            <div class="search-bar">
-                <form id="myForm" method="post">
-                    <input type="text" name="recherche" placeholder="Rechercher...">
-                    <button type="submit" name="button1" value="Rechercher">Rechercher</button>
-                </form>
-            </div>
         </div>
     </div>
     <div id="section">
@@ -150,6 +144,16 @@
                     <img src="brooklyn.png">
                     <img src="thibaut.png">
                 </div>
+            </div>
+            <div class="search-bar">
+                <form id="myForm" method="post">
+                    <input type="text" name="recherche" placeholder="Rechercher Coachs...">
+                    <button type="submit" name="button1" value="Rechercher">Rechercher</button>
+                </form>
+                <form id="myForm2" method="post">
+                    <input type="text" name="recherche" placeholder="Rechercher Clients...">
+                    <button type="submit" name="button2" value="Rechercher">Rechercher</button>
+                </form>
             </div>
         </div>
         <div id="clients" class="content hidden">
@@ -249,6 +253,22 @@
                     console.error(error);
                 }
             });
+        });
+        $('#myForm2').on('submit', function(event) {
+            event.preventDefault(); // Empêche le formulaire de soumettre normalement
+
+            $.ajax({
+                type: 'POST',
+                url: 'clients.php',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#recherche').html(response);
+                    showSection('searchResults'); // Afficher la section des résultats de recherche
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+         x   });
         });
 
         $('#myFormco').on('submit', function(event) {

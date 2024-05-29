@@ -2,7 +2,7 @@
 
 // Créer la connexion
 
-$database = "coachTest";
+$database = "sportify";
 //identifier votre serveur, login et mot de passe
 $db_handle = mysqli_connect('localhost', 'root', '');
 $db_found = mysqli_select_db($db_handle, $database);
@@ -11,7 +11,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 
 
 // Récupérer la liste des coaches
-$sql = "SELECT id, first_name, last_name FROM coaches";
+$sql = "SELECT idcoach, prenom, nom FROM sportify";
 $result = mysqli_query($db_handle, $sql);
  if ($db_found) {
     $erreur = false;
@@ -85,7 +85,7 @@ else{
                 if ($result->num_rows > 0) {
                     // Afficher les noms des coaches
                     while($row = $result->fetch_assoc()) {
-                        echo '<li onclick="loadDetails(' . $row["id"] . ')">' . $row["first_name"] . ' ' . $row["last_name"] . '</li>';
+                        echo '<li onclick="loadDetails(' . $row["idcoach"] . ')">' . $row["prenom"] . ' ' . $row["nom"] . '</li>';
                     }
                 } else {
                     echo "0 results";

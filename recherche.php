@@ -1,6 +1,6 @@
 <?php
     // Database connection
-    $database = "coachTest";
+    $database = "sportify";
     $db_handle = mysqli_connect('localhost', 'root', '');
     $db_found = mysqli_select_db($db_handle, $database);
     $choice = isset($_POST["button1"]) ? $_POST["button1"] : "";
@@ -15,12 +15,12 @@
         
         switch ($choice) {
             case "":
-                $sql = "SELECT * FROM coaches WHERE first_name LIKE '%" . $recherche . "%' OR last_name LIKE '%" . $recherche . "%' OR specialty LIKE '%" . $recherche . "%'";
+                $sql = "SELECT * FROM coaches WHERE prenom LIKE '%" . $recherche . "%' OR nom LIKE '%" . $recherche . "%' OR specialite LIKE '%" . $recherche . "%'";
 
                 break;
             
             default:
-                $sql = "SELECT * FROM coaches WHERE first_name = 'Alice'";
+                $sql = "SELECT * FROM coaches WHERE prenom = 'Alice'";
                 break;
         }
         
@@ -42,10 +42,10 @@
             // Afficher le résultat
             while ($data = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
-                echo "<td>" . $data['first_name'] . "</td>";
-                echo "<td>" . $data['last_name'] . "</td>";
-                echo "<td>" . $data['specialty'] . "</td>";
-                echo "<td>" . $data['room'] . "</td>";
+                echo "<td>" . $data['prenom'] . "</td>";
+                echo "<td>" . $data['nom'] . "</td>";
+                echo "<td>" . $data['specialite'] . "</td>";
+                echo "<td>" . $data['num_salle'] . "</td>";
                 $image = $data['photo'];
                 echo "<td><img src='$image' height='60' width='80'></td>";
                 echo "</tr>";

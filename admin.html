@@ -117,12 +117,9 @@
             border-radius: 5px;
             background-color: #F0F0F2;
         }
-        .match {
+        .equipe {
             text-align: center;
             padding: 10px 0;
-            background-image: url('foot.png');
-            background-size: cover;
-            background-position: center;
         }
         .carousel {
             margin: 20px 0;
@@ -181,23 +178,16 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        <img src="logo.png" alt="Logo" style="height: 100px; text-align: center;">
+        <img src="logoadmin.png" alt="Logo" style="height: 100px; text-align: center;">
     </div>
     <div id="navigation">
         <div id="navigation1">
             <a onclick="showSection('home')">Accueil</a>
-            <div class="custom-select-wrapper">
-                <div class="custom-select" onclick="toggleOptions()">Tout parcourir</div>
-                <div class="custom-options">
-                    <div class="custom-option" onclick="showSection('sports'); loadCoaches()">Activités sportives</div>
-                    <div class="custom-option" onclick="showSection('competitive')">Sports compétition</div>
-                    <div class="custom-option" onclick="showSection('gym')">Salle de sport</div>
-                </div>
-            </div>
-            <a onclick="showSection('appointment')">Rendez-vous</a>
+            <a onclick="showSection('clientadmin')">Clients</a>
+            <a onclick="showSection('coachadmin')">Coachs</a>
         </div>
         <div id="navigation2">
-            <a href="#" onclick="showSection('account')"><img src="util.png" alt="Votre Compte" style="height: 40px;"></a>
+            <a onclick="showSection('account')"><img src="admin.png" alt="Votre Compte" style="height: 40px;"></a>
             <div class="search-bar">
                 <form id="myForm" method="post">
                     <input type="text" name="recherche" placeholder="Rechercher...">
@@ -210,21 +200,16 @@
         <div id="recherche"></div>
         <div id="home" class="content">
             <div class="welcome">
-                <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
+                <p>Vous êtes actuellement sur un compte administrateur, faites attention à ne pas faire n'importe quoi...</p>
             </div>
             <div class="event">
-                <h2>Évènement de la semaine</h2>
-                <p>Ne manquez pas notre match! Le classico des post-bac!</p>
-                <div class="match">
-                    <img src="ece.png" alt="ECE Logo">
-                    <img src="vs.png" alt="vs">
-                    <img src="esilv.png" alt="ESILV Logo">
+                <h2>Notre équipe :</h2>
+                <div class="equipe">
+                    <img src="martin.png">
+                    <img src="alexia.png">
+                    <img src="brooklyn.png">
+                    <img src="thibaut.png">
                 </div>
-            </div>
-            <div class="carousel">
-                <img src="specialist1.jpg" alt="Specialist 1">
-                <img src="specialist2.jpg" alt="Specialist 2">
-                <img src="specialist3.jpg" alt="Specialist 3">
             </div>
         </div>
         <div id="account" class="content hidden">

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,10 +73,6 @@
             border-radius: 5px;
             background-color: #F0F0F2;
         }
-        .equipe {
-            text-align: center;
-            padding: 10px 0;
-        }
         .carousel img {
             width: 100%;
             border-radius: 5px;
@@ -118,7 +115,7 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        <img src="logoadmin.png" alt="Logo" style="height: 100px; text-align: center;">
+        <img src="logo.png" alt="Logo" style="height: 100px; text-align: center;">
     </div>
     <div id="navigation">
         <div id="navigation1">
@@ -127,7 +124,7 @@
             <a onclick="showSection('coachs')">Coachs</a>
         </div>
         <div id="navigation2">
-            <a href="login.html"><img src="admin.png" alt="Votre Compte" style="height: 40px;"></a>
+            <a href="login.html"><img src="util.png" alt="Votre Compte" style="height: 40px;"></a>
         </div>
     </div>
     <div id="section">
@@ -138,13 +135,8 @@
                 <p>Vous êtes un <span id="user_type"></span>! Votre ID est : <span id="user_id"></span></p>
             </div>
             <div class="event">
-                <h2>Notre équipe :</h2>
-                <div class="equipe">
-                    <img src="alexia.png">
-                    <img src="martin.png">
-                    <img src="brooklyn.png">
-                    <img src="thibaut.png">
-                </div>
+                <h2>Votres emploi du temps :</h2>
+                <div class="edt"></div>
             </div>
             <div class="search-bar">
                 <form id="myForm" method="post">
@@ -157,12 +149,8 @@
                 </form>
             </div>
         </div>
-        <div id="clients" class="content hidden">
-            <!-- Contenu des clients sera ici -->
-        </div>
-        <div id="coachs" class="content hidden">
-            <!-- Contenu des coachs sera ici -->
-        </div>
+        <div id="clients" class="content hidden"></div>
+        <div id="coachs" class="content hidden"></div>
     </div>
     <div id="footer">
         <p>Contactez-nous: contact@sportify.fr | Téléphone: 0169696969</p>
@@ -173,25 +161,22 @@
     </div>
 </div>
 <script>
-    function getQueryParam(param) {
-        let params = new URLSearchParams(window.location.search);
-        return params.get(param);
-    }
-
     function showSection(section) {
         const sections = document.querySelectorAll('.content');
         sections.forEach(sec => sec.classList.add('hidden'));
         document.getElementById(section).classList.remove('hidden');
 
-        // Réinitialiser les résultats de recherche et le formulaire de recherche si on navigue vers une autre section que searchResults
-        if (section !== 'searchResults') {
+        if (section === 'clients') {
             resetSearchResults();
             resetSearchForm();
-        }
-
-        // Charger les coachs si on affiche la section coachs
-        if (section === 'coachs') {
+            fetchClients();
+        } else if (section === 'coachs') {
+            resetSearchResults();
+            resetSearchForm();
             fetchCoaches();
+        } else {
+            resetSearchResults();
+            resetSearchForm();
         }
     }
 
@@ -201,6 +186,35 @@
 
     function resetSearchForm() {
         document.getElementById('myForm').reset();
+        document.getElementById('myForm2').reset();
+    }
+
+    function fetchClients() {
+        $.ajax({
+            type: 'POST',
+            url: 'clients.php',
+            data: { recherche: '' },
+            success: function(response) {
+                $('#clients').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    function fetchCoaches() {
+        $.ajax({
+            type: 'POST',
+            url: 'recherche.php',
+            data: { recherche: '' },
+            success: function(response) {
+                $('#coachs').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
     }
 
     $(document).ready(function() {
@@ -221,11 +235,10 @@
                 type = 'admins';
             }
             document.getElementById('user_type').innerText = type;
-
         }
 
         $('#myForm').on('submit', function(event) {
-            event.preventDefault(); // Empêche le formulaire de soumettre normalement
+            event.preventDefault();
 
             $.ajax({
                 type: 'POST',
@@ -233,7 +246,7 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     $('#recherche').html(response);
-                    showSection('searchResults'); // Afficher la section des résultats de recherche
+                    showSection('coachs');
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
@@ -242,7 +255,7 @@
         });
 
         $('#myForm2').on('submit', function(event) {
-            event.preventDefault(); // Empêche le formulaire de soumettre normalement
+            event.preventDefault();
 
             $.ajax({
                 type: 'POST',
@@ -250,23 +263,7 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     $('#recherche').html(response);
-                    showSection('searchResults'); // Afficher la section des résultats de recherche
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        });
-
-        $('#myFormco').on('submit', function(event) {
-            event.preventDefault(); // Empêche le formulaire de soumettre normalement
-
-            $.ajax({
-                type: 'POST',
-                url: 'connexion.php',
-                data: $(this).serialize(),
-                success: function(response) {
-                    console.log('Connexion réussie');
+                    showSection('clients');
                 },
                 error: function(xhr, status, error) {
                     console.error(error);

@@ -158,10 +158,8 @@
             </div>
         </div>
         <div id="clients" class="content hidden">
-            <!-- Contenu des clients sera ici -->
         </div>
         <div id="coachs" class="content hidden">
-            <!-- Contenu des coachs sera ici -->
         </div>
     </div>
     <div id="footer">
@@ -173,25 +171,22 @@
     </div>
 </div>
 <script>
-    function getQueryParam(param) {
-        let params = new URLSearchParams(window.location.search);
-        return params.get(param);
-    }
-
     function showSection(section) {
         const sections = document.querySelectorAll('.content');
         sections.forEach(sec => sec.classList.add('hidden'));
         document.getElementById(section).classList.remove('hidden');
 
-        // Réinitialiser les résultats de recherche et le formulaire de recherche si on navigue vers une autre section que searchResults
-        if (section !== 'searchResults') {
+        if (section === 'clients') {
             resetSearchResults();
             resetSearchForm();
-        }
-
-        // Charger les coachs si on affiche la section coachs
-        if (section === 'coachs') {
+            fetchClients();
+        } else if (section === 'coachs') {
+            resetSearchResults();
+            resetSearchForm();
             fetchCoaches();
+        } else {
+            resetSearchResults();
+            resetSearchForm();
         }
     }
 
@@ -201,6 +196,34 @@
 
     function resetSearchForm() {
         document.getElementById('myForm').reset();
+    }
+
+    function fetchClients() {
+        $.ajax({
+            type: 'POST',
+            url: 'clients.php',
+            data: { recherche: '' }, // Envoi d'une requête vide pour obtenir tous les clients
+            success: function(response) {
+                $('#clients').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    function fetchCoaches() {
+        $.ajax({
+            type: 'POST',
+            url: 'recherche.php',
+            data: { recherche: '' }, // Envoi d'une requête vide pour obtenir tous les coachs
+            success: function(response) {
+                $('#coachs').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
     }
 
     $(document).ready(function() {
@@ -251,22 +274,6 @@
                 success: function(response) {
                     $('#recherche').html(response);
                     showSection('searchResults'); // Afficher la section des résultats de recherche
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        });
-
-        $('#myFormco').on('submit', function(event) {
-            event.preventDefault(); // Empêche le formulaire de soumettre normalement
-
-            $.ajax({
-                type: 'POST',
-                url: 'connexion.php',
-                data: $(this).serialize(),
-                success: function(response) {
-                    console.log('Connexion réussie');
                 },
                 error: function(xhr, status, error) {
                     console.error(error);

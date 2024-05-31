@@ -4,15 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion Utilisateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #76D2FF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #login-wrapper {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #login-wrapper h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .form-group input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .form-group input:focus {
+            border-color: #76D2FF;
+            box-shadow: 0 0 8px #76D2FF;
+        }
+        .form-group label {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            transition: all 0.3s;
+            background: #fff;
+            padding: 0 5px;
+            color: #aaa;
+        }
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 10px;
+            color: #76D2FF;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        #login-wrapper input[type="submit"] {
+            background-color: #E0E0E0;
+            border: 2px solid #808080;
+            color: black;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #login-wrapper input[type="submit"]:hover {
+            background-color: #D0D0D0;
+        }
+        #login-wrapper a {
+            color: #76D2FF;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: color 0.3s;
+        }
+        #login-wrapper a:hover {
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-<h2>Connexion</h2>
-<form action="login.php" method="post">
-    <label for="email">Adresse E-mail:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
-    <label for="password">Mot de Passe:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
-    <input type="submit" value="Se Connecter">
-</form>
+    <div id="login-wrapper">
+        <h2>Connexion</h2>
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder=" " required>
+                <label for="email">Adresse E-mail</label>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder=" " required>
+                <label for="password">Mot de Passe</label>
+            </div>
+            <input type="submit" value="Se Connecter">
+        </form>
+        <a href="register.html">Créer un compte</a>
+    </div>
 </body>
 </html>

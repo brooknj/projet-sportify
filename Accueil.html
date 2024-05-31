@@ -42,34 +42,21 @@
             align-items: center;
             gap: 10px;
         }
-        #navigation1 a {
+        #navigation1 a, .custom-select {
             padding: 10px 20px;
             text-decoration: none;
             background-color: #E0E0E0;
             color: black;
             border: 2px solid #808080;
+            cursor: pointer;
         }
         #navigation a:hover {
             background-color: #D0D0D0;
         }
-
         .custom-select-wrapper {
             position: relative;
             display: inline-block;
             user-select: none;
-        }
-        .custom-select {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            appearance: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: 2px solid #808080;
-            background-color: #E0E0E0;
-            color: black;
-            cursor: pointer;
-            position: relative;
         }
         .custom-select:after {
             content: '\25BE'; /* flèche vers le bas */
@@ -96,7 +83,6 @@
         .custom-option:hover {
             background-color: #D0D0D0;
         }
-
         #section {
             padding: 20px;
         }
@@ -106,60 +92,18 @@
             border-top: 1px solid #ccc;
             background-color: #76D2FF;
         }
-        .welcome {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        .event, .bulletin {
-            text-align: center;
-            margin: 20px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #F0F0F2;
-        }
-        .match {
-            text-align: center;
-            padding: 10px 0;
-            background-image: url('foot.png');
-            background-size: cover;
-            background-position: center;
-        }
-        .carousel {
-            margin: 20px 0;
-        }
-        .carousel img {
-            width: 100%;
-            border-radius: 5px;
-        }
         .hidden {
             display: none;
         }
-        .search-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .search-bar input[type="text"] {
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .search-bar button {
-            padding: 5px 10px;
-            font-size: 16px;
-            background-color: #E0E0E0;
-            border: 2px solid #808080;
-            cursor: pointer;
-        }
-        .search-bar button:hover {
-            background-color: #D0D0D0;
-        }
         .container {
             display: flex;
-            justify-content: space-around;
-            width: 80%;
+            flex-direction: row; /* Afficher les sections sous forme de colonne horizontale */
+            justify-content: center; /* Centrer les sections verticalement */
+        }
+        .section {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 0 10px;
         }
         .pave {
             background-color: #ffffff;
@@ -190,12 +134,13 @@
             <div class="custom-select-wrapper">
                 <div class="custom-select" onclick="toggleOptions()">Tout parcourir</div>
                 <div class="custom-options">
-                    <div class="custom-option" onclick="showSection('sports'); loadCoaches()">Activités sportives</div>
+                    <div class="custom-option" onclick="showSection('sports'); loadSection('coach', 'affichagecoach5.php')">Activités sportives</div>
                     <div class="custom-option" onclick="showSection('competitive')">Sports compétition</div>
                     <div class="custom-option" onclick="showSection('gym')">Salle de sport</div>
                 </div>
             </div>
-            <a onclick="showSection('appointment')">Rendez-vous</a>
+            <a id="buttonrdv" onclick="showSection('appointment')">Rendez-vous</a>
+            <a onclick="showSection('services')">Nos services</a>
         </div>
         <div id="navigation2">
             <a href="#" onclick="showSection('account')"><img src="util.png" alt="Votre Compte" style="height: 40px;"></a>
@@ -208,6 +153,17 @@
         </div>
     </div>
     <div id="section">
+        <div class="container">
+            <section class="section" id="section1">
+                <button onclick="loadSection('coach', 'affichagecoach5.php')">Sports</button>
+            </section>
+            <section class="section" id="coach"></section>
+            <section class="section" id="details"></section>
+            <section class="section" id="messagerie"></section>
+            <section class="section" id="rdv"></section>
+            <section class="section" id="cv"></section>
+        </div>
+        <div id="listrdv"></div>
         <div id="home" class="content">
             <div class="welcome">
                 <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
@@ -226,6 +182,91 @@
                 <img src="specialist2.jpg" alt="Specialist 2">
                 <img src="specialist3.jpg" alt="Specialist 3">
             </div>
+        </div>
+        <div id="services" class="content hidden">
+            <h3>Nos Services</h3>
+            <ul>
+                <li><a onclick="showSection('personnel')">Personnels de la salle de sport</a></li>
+                <li><a onclick="showSection('schedule')">Horaire de la gym</a></li>
+                <li><a onclick="showSection('rules')">Règles sur l'utilisation des machines</a></li>
+                <li><a onclick="showSection('newClients')">Nouveaux clients</a></li>
+                <li><a onclick="showSection('nutrition')">Alimentation et nutrition</a></li>
+            </ul>
+        </div>
+        <div id="personnel" class="content hidden">
+            <h3>Personnels de la salle de sport</h3>
+            <!-- Contenu des personnels -->
+        </div>
+        <div id="schedule" class="content hidden">
+            <h3>Horaire de la gym</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Jour</th>
+                    <th>Horaires</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Lundi</td>
+                    <td>09:00 - 18:00</td>
+                </tr>
+                <tr>
+                    <td>Mardi</td>
+                    <td>09:00 - 18:00</td>
+                </tr>
+                <tr>
+                    <td>Mercredi</td>
+                    <td>09:00 - 18:00</td>
+                </tr>
+                <tr>
+                    <td>Jeudi</td>
+                    <td>09:00 - 18:00</td>
+                </tr>
+                <tr>
+                    <td>Vendredi</td>
+                    <td>09:00 - 18:00</td>
+                </tr>
+                <tr>
+                    <td>Samedi</td>
+                    <td>09:00 - 18:00</td>
+                </tr>
+                <tr>
+                    <td>Dimanche</td>
+                    <td>Fermé</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="rules" class="content hidden">
+            <h3>Règles sur l'utilisation des machines</h3>
+            <ul>
+                <li>Poids</li>
+                <li>Haltères</li>
+                <li>Barbellons</li>
+                <li>Appareils cardio</li>
+            </ul>
+            <p>Veuillez suivre les instructions pour chaque appareil pour éviter les blessures et assurer un usage correct.</p>
+            <h3>Calendrier des créneaux disponibles pour visiter la salle de sport</h3>
+            <table>
+                <tr>
+                    <th>Heure</th>
+                    <th>Disponibilité</th>
+                </tr>
+                <tr>
+                    <td>09:00 - 10:00</td>
+                    <td><button onclick="bookSlot('09:00 - 10:00')">Réserver</button></td>
+                </tr>
+                <!-- Ajouter d'autres créneaux ici -->
+            </table>
+        </div>
+        <div id="newClients" class="content hidden">
+            <h3>Nouveaux clients</h3>
+            <!-- Contenu pour les nouveaux clients -->
+        </div>
+        <div id="nutrition" class="content hidden">
+            <h3>Alimentation et nutrition</h3>
+            <!-- Contenu pour alimentation et nutrition -->
         </div>
         <div id="account" class="content hidden">
             <div id="acccount" class="container">
@@ -256,7 +297,7 @@
                                 <td><input type="password" name="carteEtu" id="carteEtudiante"></td>
                             </tr>
                             <tr>
-                                    <td colspan="2" align="center">
+                                <td colspan="2" align="center">
                                     <input type="submit" name="buttonco" value="Valider">
                                 </td>
                             </tr>
@@ -384,7 +425,7 @@
         </div>
     </div>
     <div id="footer">
-        <p>Contactez-nous: contact@sportify.fr | Téléphone: 0169696969</p>
+        <p>Contactez-nous: contact@sportify.fr | Téléphone: 01 69 69 69 69</p>
         <p>Adresse: 22 Av. Paul Doumer, 92500 Rueil-Malmaison, France</p>
         <div id="map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d882.3198584258157!2d2.1902313500064885!3d48.8832418762505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e665022f3e5f03%3A0x69638eec0c3c6b40!2s22%20Av.%20Paul%20Doumer%2C%2092500%20Rueil-Malmaison!5e0!3m2!1sfr!2sfr!4v1687649504793!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -414,8 +455,11 @@
 
     function toggleOptions() {
         const options = document.querySelector('.custom-options');
-        options.classList.toggle('open');
+        options.classList.toggle('active');
     }
+
+
+
 
     function resetSearchResults() {
         document.getElementById('recherche').innerHTML = '';
@@ -481,6 +525,64 @@
             });
         });
     });
+
+    function bookSlot(time) {
+        alert('Votre créneau ' + time + ' est réservé.');
+        // Envoyer une requête au serveur pour réserver le créneau
+    }
+
+    function loadSection(section, url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(section).innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+        function loadDetails(idcoach) {
+            fetch('details4.php?idcoach=' + idcoach)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('details').innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+        function loadMessagerie(idcoach) {
+            fetch('messagerie2.php?idcoach=' + idcoach)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('messagerie').innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+        function loadRdv(idcoach) {
+            fetch('calendrier2.php?idcoach=' + idcoach)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('rdv').innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+    document.getElementById('buttonrdv').addEventListener('click', function() {
+            var idclient = 2; // Valeur prédéfinie
+
+            var formData = new FormData();
+            formData.append('idclient', idclient);
+
+            fetch('afficherdv.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('listrdv').innerHTML = data;
+            })
+            .catch(error => console.error('Erreur:', error));
+        });
+
 </script>
 </body>
 </html>

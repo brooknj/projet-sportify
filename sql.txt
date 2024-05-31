@@ -5,142 +5,216 @@ DROP DATABASE IF EXISTS sportify;
 CREATE DATABASE sportify;
 
 -- Utiliser la base de données
-USE sportify ;
+USE sportify;
 
-DROP TABLE IF EXISTS coaches ;
-DROP TABLE IF EXISTS clients ;
-DROP TABLE IF EXISTS admins ;
-DROP TABLE IF EXISTS respos ;
-DROP TABLE IF EXISTS paiements ;
-DROP TABLE IF EXISTS salles ;
-DROP TABLE IF EXISTS rdv ;
-DROP TABLE IF EXISTS messages ;
-
+DROP TABLE IF EXISTS coaches;
+DROP TABLE IF EXISTS clients;
+DROP TABLE IF EXISTS admins;
+DROP TABLE IF EXISTS respos;
+DROP TABLE IF EXISTS paiements;
+DROP TABLE IF EXISTS salles;
+DROP TABLE IF EXISTS rdv;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS calendrier;
 
 -- Créer la table coaches
 CREATE TABLE coaches(
-idcoach INT AUTO_INCREMENT PRIMARY KEY,
-nom VARCHAR(20),
-prenom VARCHAR(20),
-specialite VARCHAR(20),
-mail VARCHAR(50),
-num_salle VARCHAR(20),
-tel Numeric(11),
-photo VARCHAR(20),
-cv VARCHAR(20)
+    idcoach INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(20),
+    prenom VARCHAR(20),
+    specialite VARCHAR(20),
+    mail VARCHAR(50),
+    num_salle VARCHAR(20),
+    tel BIGINT,
+    photo VARCHAR(20),
+    cv VARCHAR(20)
 );
 
 -- Créer la table salles
 CREATE TABLE salles(
-numsalle VARCHAR(20) PRIMARY KEY,
-adressesalle VARCHAR(50),
-mailsalle VARCHAR(20),
-photosalle VARCHAR(20),
-telsalle Numeric(11),
-horairesalle VARCHAR(20)
+    numsalle VARCHAR(20) PRIMARY KEY,
+    adressesalle VARCHAR(50),
+    mailsalle VARCHAR(50),
+    photosalle VARCHAR(20),
+    telsalle BIGINT,
+    horairesalle VARCHAR(20)
 );
 
 -- Créer la table clients
 CREATE TABLE clients(
-idclient INT AUTO_INCREMENT PRIMARY KEY,
-nomclient VARCHAR(20),
-prenomclient VARCHAR(20),
-emailclient VARCHAR(50),
-adresseclient VARCHAR(50),
-carteEtudiante Numeric(4)
+    idclient INT AUTO_INCREMENT PRIMARY KEY,
+    nomclient VARCHAR(20),
+    prenomclient VARCHAR(20),
+    emailclient VARCHAR(50),
+    adresseclient VARCHAR(50),
+    carteEtudiante INT
 );
 
 -- Créer la table paiements
 CREATE TABLE paiements(
-idclient INT(6) PRIMARY KEY,
-nom VARCHAR(20),
-prenom VARCHAR(20),
-email VARCHAR(50),
-adresse1 VARCHAR(50),
-adresse2 VARCHAR(50),
-ville VARCHAR(20),
-pays VARCHAR(20),
-tel Numeric(11),
-typecarte VARCHAR(20),
-numcarte Numeric(16),
-nomcrate VARCHAR(20),
-dateexp DATE,
-codesecu INT(4)
+    idclient INT PRIMARY KEY,
+    nom VARCHAR(20),
+    prenom VARCHAR(20),
+    email VARCHAR(50),
+    adresse1 VARCHAR(50),
+    adresse2 VARCHAR(50),
+    ville VARCHAR(20),
+    pays VARCHAR(20),
+    tel BIGINT,
+    typecarte VARCHAR(20),
+    numcarte BIGINT,
+    nomcrate VARCHAR(20),
+    dateexp DATE,
+    codesecu INT
 );
 
 -- Créer la table rdv
 CREATE TABLE rdv(
-idrdv INT AUTO_INCREMENT PRIMARY KEY,
-idclient INT(6),
-idcoach INT(6),
-horaire TIME(3),
-jour DATE,
-salle VARCHAR(20)
+    idrdv INT AUTO_INCREMENT PRIMARY KEY,
+    idclient INT,
+    idcoach INT,
+    horaire TIME,
+    jour VARCHAR(20),
+    salle VARCHAR(20),
+    FOREIGN KEY (idclient) REFERENCES clients(idclient),
+    FOREIGN KEY (idcoach) REFERENCES coaches(idcoach)
 );
 
 -- Créer la table admins
 CREATE TABLE admins (
-idadmin INT(6) PRIMARY KEY,
-nom VARCHAR(20),
-prenom VARCHAR(20),
-email VARCHAR(50)
+    idadmin INT PRIMARY KEY,
+    nom VARCHAR(20),
+    prenom VARCHAR(20),
+    email VARCHAR(50)
 );
 
 -- Créer la table respos
 CREATE TABLE respos (
-idrespo INT(6) PRIMARY KEY,
-salle VARCHAR(20),
-nom VARCHAR(20),
-prenom VARCHAR(20),
-email VARCHAR(50),
-tel Numeric(11)
+    idrespo INT PRIMARY KEY,
+    salle VARCHAR(20),
+    nom VARCHAR(20),
+    prenom VARCHAR(20),
+    email VARCHAR(50),
+    tel BIGINT
 );
 
 CREATE TABLE messages (
-idmessage INT AUTO_INCREMENT PRIMARY KEY,
-text TEXT,
-idexpediteur INT(6),
-idreceveur INT(6),
-temps TIME,
-jour DATE,
+    idmessage INT AUTO_INCREMENT PRIMARY KEY,
+    text TEXT,
+    idcoach INT,
+    idclient INT,
+    sens INT,
+    temps TIME,
+    jour DATE,
+    FOREIGN KEY (idcoach) REFERENCES coaches(idcoach),
+    FOREIGN KEY (idclient) REFERENCES clients(idclient)
 );
 
+CREATE TABLE calendrier(
+    idcoach INT PRIMARY KEY,
+    lundiam INT,
+    lundipm INT,
+    mardiam INT,
+    mardipm INT,
+    mercrediam INT,
+    mercredipm INT,
+    jeudiam INT,
+    jeudipm INT,
+    vendrediam INT,
+    vendredipm INT,
+    samediam INT,
+    samedipm INT,
+    FOREIGN KEY (idcoach) REFERENCES coaches(idcoach)
+);
 
+-- Insertion des données dans les tables
+INSERT INTO coaches (nom, prenom, specialite, mail, num_salle, tel, photo) VALUES
+('Klinger', 'Julien', 'Tennis', 'julien.klinger@sportify.com', 'C-001', 641490230, 'julien.png'),
+('Urvoy', 'Mathis', 'Basket', 'mathis.urvoy@sportify.com', 'C-002', 714212835, 'mathis.png'),
+('Chevalier', 'Alice', 'Cardio-Training', 'alice.chevalier@sporify.com', 'C-003', 624144988, 'alice.png'),
+('Baudy', 'Benjamin', 'Biking', 'benjamin.baudy@sportify.com', 'C-004', 616243240, 'benjamin.png'),
+('Wyka', 'Martin', 'Musculation', 'martin.wyka@sportify.com', 'C-005', 659500718, 'martin.png'),
+('Hoang', 'Laura', 'Fitness', 'laura.hoang@sportify.com', 'C-006', 716506930, 'laura.png'),
+('Auxfraises', 'Charlotte', 'Cours collectifs', 'charlotte.auxfraises@sportify.com', 'C-007', 654128376, 'charlotte.png'),
+('Jaccod', 'Bastien', 'Football', 'bastien.jaccod@sportify.com', 'C-008', 688542764, 'bastien.png'),
+('Romeo', 'Alexandre', 'Natation', 'alexandre.romeo@sportify.com', 'C-009', 640826635, 'alexandre.png'),
+('Migan', 'Aude', 'Plongeon', 'aude.migan@sportify.com', 'C-010', 784305935, 'aude.png'),
+('Berteau', 'Pierre', 'Rugby', 'pierre.berteau@sportify.com', 'C-011', 650403087, 'pierre.png');
 
-INSERT INTO coaches (nom, prenom, specialite, mail, num_salle, tel, photo)
-VALUES
-('Klinger', 'Julien', 'Tennis', 'julien.klinger@sportify.com', 'C-001', 0641490230, 'julien.png'), ('Urvoy', 'Mathis', 'Basket', 'mathis.urvoy@sportify.com', 'C-002', 0714212835, 'mathis.png'), ('Chevalier', 'Alice', 'Cardio-Training', 'alice.chevalier@sporify.com', 'C-003', 0624144988, 'alice.png'),
-('Baudy', 'Benjamin', 'Biking', 'benjamin.baudy@sportify.com', 'C-004', 0616243240, 'benjamin.png'),
-('Wyka', 'Martin', 'Musculation', 'martin.wyka@sportify.com', 'C-005', 0659500718, 'martin.png'),
-('Hoang', 'Laura', 'Fitness', 'laura.hoang@sportify.com', 'C-006', 0716506930, 'laura.png'),
-('Auxfraises', 'Charlotte', 'Cours collectifs', 'charlotte.auxfraises@sportify.com', 'C-007', 0654128376, 'charlotte.png'),
-('Jaccod', 'Bastien', 'Football', 'bastien.jaccod@sportify.com', 'C-008', 0688542764, 'bastien.png'),
-('Romeo', 'Alexandre', 'Natation', 'alexandre.romeo@sportify.com', 'C-009', 0640826635, 'alexandre.png'),
-('Migan', 'Aude', 'Plongeon', 'aude.migan@sportify.com', 'C-010', 0784305935, 'aude.png'),
-('Berteau', 'Pierre', 'Rugby', 'pierre.berteau@sportify.com', 'C-011', 0650403087, 'pierre.png');
+INSERT INTO clients (nomclient, prenomclient, emailclient, adresseclient, carteEtudiante) VALUES
+('Drauchon', 'Paul', 'paul.drochon@sportify.com', '30 rue Moliere', 1),
+('Rossi', 'Elara', 'elara.rossi@sportify.com', '42 Rue de Rivoli, Paris', 2),
+('Nielsen', 'Kael', 'kael.nielsen@sportify.com', '77 Boulevard Saint-Germain, Paris', 3),
+('Petrov', 'Lyra', 'lyra.petrov@sportify.com', '13 Rue de la Paix, Paris', 4),
+('Dumont', 'Thorin', 'thorin.dumont@sportify.com', '88 Avenue Montaigne, Paris', 5),
+('Novák', 'Nova', 'nova.novak@sportify.com', '5 Rue du Faubourg Saint-Honoré, Paris', 6),
+('Schmidt', 'Fenris', 'fenris.schmidt@sportify.com', '22 Rue Saint-Dominique, Paris', 7),
+('Varga', 'Sylvan', 'sylvan.varga@sportify.com', '9 Rue de Vaugirard, Paris', 8),
+('Larsen', 'Aria', 'aria.larsen@sportify.com', '33 Rue La Fayette, Paris', 9),
+('Iversen', 'Draven', 'draven.iversen@sportify.com', '66 Avenue de la Grande Armée, Paris', 10),
+('Hoffmann', 'Aurion', 'aurion.hoffmann@sportify.com', '1 Avenue des Champs-Élysées, Paris', 11);
 
-INSERT INTO clients (nomclient, prenomclient, emailclient, adresseclient, carteEtudiante)
-VALUES ('Drauchon', 'Paul', 'paul.drochon@sportify.com', '30 rue Moliere', 0001),
-('Rossi', 'Elara', 'elara.rossi@sportify.com', '42 Rue de Rivoli, Paris', 0002),
-('Nielsen', 'Kael', 'kael.nielsen@sportify.com', '77 Boulevard Saint-Germain, Paris', 0003),
-('Petrov', 'Lyra', 'lyra.petrov@sportify.com', '13 Rue de la Paix, Paris', 0004),
-('Dumont', 'Thorin', 'thorin.dumont@sportify.com', '88 Avenue Montaigne, Paris', 0005),
-('Novák', 'Nova', 'nova.novak@sportify.com', '5 Rue du Faubourg Saint-Honoré, Paris', 0006),
-('Schmidt', 'Fenris', 'fenris.schmidt@sportify.com', '22 Rue Saint-Dominique, Paris', 0007),
-('Varga', 'Sylvan', 'sylvan.varga@sportify.com', '9 Rue de Vaugirard, Paris', 0008),
-('Larsen', 'Aria', 'aria.larsen@sportify.com', '33 Rue La Fayette, Paris', 0009),
-('Iversen', 'Draven', 'draven.iversen@sportify.com', '66 Avenue de la Grande Armée, Paris', 0010),
-('Hoffmann', 'Aurion', 'aurion.hoffmann@sportify.com', '1 Avenue des Champs-Élysées, Paris', 0011);
-
-INSERT INTO admins (idadmin, nom, prenom, email)
-VALUES (1, 'Farigoul', 'Alexia', 'alexia.farigoul@sportify.com'),
+INSERT INTO admins (idadmin, nom, prenom, email) VALUES
+(1, 'Farigoul', 'Alexia', 'alexia.farigoul@sportify.com'),
 (2, 'Wyka', 'Martin', 'martin.wyka@sportify.com'),
 (3, 'Nkengoue', 'Brooklyn', 'brooklyn.nkengoue@sportify.com'),
 (4, 'Puel', 'Thibaut', 'thibaut.puel@sportify.com');
 
-INSERT INTO respos (idrespo, salle, nom, prenom, email, tel)
-VALUES
-(1, 'C-001', 'Bricout', 'Théodore', 'theodore.bricout@sportify.com', 0633432681),
-(2, 'C-002', 'Siritham', 'Evan', 'evan.siritham@sportify.com', 0654424874),
-(3, 'C-003', 'Quaranta', 'Benoit', 'benoit.quaranta@sportify.com', 0646511873),
-(4, 'C-004', 'Petit', 'Laure', 'laure.petit@sportify.com', 0745426884);
+INSERT INTO respos (idrespo, salle, nom, prenom, email, tel) VALUES
+(1, 'C-001', 'Bricout', 'Théodore', 'theodore.bricout@sportify.com', 633432681),
+(2, 'C-002', 'Siritham', 'Evan', 'evan.siritham@sportify.com', 654424874),
+(3, 'C-003', 'Quaranta', 'Benoit', 'benoit.quaranta@sportify.com', 646511873),
+(4, 'C-004', 'Petit', 'Laure', 'laure.petit@sportify.com', 745426884);
+
+INSERT INTO calendrier (idcoach, lundiam, lundipm, mardiam, mardipm, mercrediam, mercredipm, jeudiam, jeudipm, vendrediam, vendredipm, samediam, samedipm) VALUES
+(1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1),
+(2, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0),
+(3, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1),
+(4, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0),
+(5, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1),
+(6, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0),
+(7, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1),
+(8, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0),
+(9, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0),
+(10, 1, 1, 1, 1, 0 ,0 ,1 ,1 ,0 ,0 ,0 ,1);
+
+-- Insérer 30 rendez-vous dans la table rdv
+INSERT INTO rdv (idclient, idcoach, horaire, jour, salle) VALUES
+(2, 2, '09:00:00', 'lundi', 'C-002'),
+(3, 3, '10:15:00', 'lundi', 'C-003'),
+(4, 4, '13:30:00', 'lundi', 'C-004'),
+(5, 5, '14:45:00', 'lundi', 'C-005'),
+(6, 6, '16:00:00', 'lundi', 'C-006'),
+(3, 2, '09:30:00', 'mardi', 'C-002'),
+(4, 3, '10:45:00', 'mardi', 'C-003'),
+(5, 4, '13:00:00', 'mardi', 'C-004'),
+(6, 5, '15:15:00', 'mardi', 'C-005'),
+(2, 6, '16:30:00', 'mardi', 'C-006'),
+(4, 2, '09:00:00', 'jeudi', 'C-002'),
+(5, 3, '10:15:00', 'jeudi', 'C-003'),
+(6, 4, '13:30:00', 'jeudi', 'C-004'),
+(2, 5, '14:45:00', 'jeudi', 'C-005'),
+(3, 6, '16:00:00', 'jeudi', 'C-006'),
+(5, 2, '13:00:00', 'samedi', 'C-002'),
+(6, 3, '14:15:00', 'samedi', 'C-003'),
+(2, 4, '15:30:00', 'samedi', 'C-004'),
+(3, 5, '16:45:00', 'samedi', 'C-005'),
+(4, 6, '18:00:00', 'samedi', 'C-006'),
+(1, 1, '08:30:00', 'lundi', 'C-001'),
+(1, 1, '11:30:00', 'lundi', 'C-001'),
+(1, 1, '12:45:00', 'lundi', 'C-001'),
+(1, 1, '08:45:00', 'mardi', 'C-001'),
+(1, 1, '11:00:00', 'mardi', 'C-001'),
+(1, 1, '12:15:00', 'mardi', 'C-001'),
+(1, 1, '09:00:00', 'jeudi', 'C-001'),
+(1, 1, '11:15:00', 'jeudi', 'C-001'),
+(1, 1, '12:30:00', 'jeudi', 'C-001'),
+(1, 1, '13:45:00', 'samedi', 'C-001'),
+(1, 1, '15:00:00', 'samedi', 'C-001'),
+(1, 1, '16:15:00', 'samedi', 'C-001');
+
+INSERT INTO messages (text, idcoach, idclient, sens, temps, jour) VALUES
+('Coucou beau gosse', 1, 1, 0, '10:18:00', '2024-05-30'),
+('Bonjour', 1, 1, 1, '10:19:00', '2024-05-30'),
+('Tu peux me faire un cours de sport', 1, 1, 0, '10:20:00', '2024-05-30'),
+('Coucou beau gosse 2.0', 2, 1, 0, '10:21:00', '2024-05-30');

@@ -97,8 +97,13 @@
         }
         .container {
             display: flex;
-            justify-content: space-around;
-            width: 80%;
+            flex-direction: row; /* Afficher les sections sous forme de colonne horizontale */
+            justify-content: center; /* Centrer les sections verticalement */
+        }
+        .section {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 0 10px;
         }
         .pave {
             background-color: #ffffff;
@@ -129,12 +134,12 @@
             <div class="custom-select-wrapper">
                 <div class="custom-select" onclick="toggleOptions()">Tout parcourir</div>
                 <div class="custom-options">
-                    <div class="custom-option" onclick="showSection('sports'); loadCoaches()">Activités sportives</div>
+                    <div class="custom-option" onclick="showSection('sports'); loadSection('coach', 'affichagecoach5.php')">Activités sportives</div>
                     <div class="custom-option" onclick="showSection('competitive')">Sports compétition</div>
                     <div class="custom-option" onclick="showSection('gym')">Salle de sport</div>
                 </div>
             </div>
-            <a onclick="showSection('appointment')">Rendez-vous</a>
+            <a id="buttonrdv" onclick="showSection('appointment')">Rendez-vous</a>
             <a onclick="showSection('services')">Nos services</a>
         </div>
         <div id="navigation2">
@@ -148,6 +153,17 @@
         </div>
     </div>
     <div id="section">
+        <div class="container">
+            <section class="section" id="section1">
+                <button onclick="loadSection('coach', 'affichagecoach5.php')">Sports</button>
+            </section>
+            <section class="section" id="coach"></section>
+            <section class="section" id="details"></section>
+            <section class="section" id="messagerie"></section>
+            <section class="section" id="rdv"></section>
+            <section class="section" id="cv"></section>
+        </div>
+        <div id="listrdv"></div>
         <div id="home" class="content">
             <div class="welcome">
                 <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
@@ -439,8 +455,11 @@
 
     function toggleOptions() {
         const options = document.querySelector('.custom-options');
-        options.classList.toggle('open');
+        options.classList.toggle('active');
     }
+
+
+
 
     function resetSearchResults() {
         document.getElementById('recherche').innerHTML = '';
@@ -511,6 +530,59 @@
         alert('Votre créneau ' + time + ' est réservé.');
         // Envoyer une requête au serveur pour réserver le créneau
     }
+
+    function loadSection(section, url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(section).innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+        function loadDetails(idcoach) {
+            fetch('details4.php?idcoach=' + idcoach)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('details').innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+        function loadMessagerie(idcoach) {
+            fetch('messagerie2.php?idcoach=' + idcoach)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('messagerie').innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+        function loadRdv(idcoach) {
+            fetch('calendrier2.php?idcoach=' + idcoach)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('rdv').innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+    document.getElementById('buttonrdv').addEventListener('click', function() {
+            var idclient = 2; // Valeur prédéfinie
+
+            var formData = new FormData();
+            formData.append('idclient', idclient);
+
+            fetch('afficherdv.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('listrdv').innerHTML = data;
+            })
+            .catch(error => console.error('Erreur:', error));
+        });
+
 </script>
 </body>
 </html>

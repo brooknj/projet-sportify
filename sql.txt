@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS salles;
 DROP TABLE IF EXISTS rdv;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS calendrier;
+DROP TABLE IF EXISTS donnee;
 
 -- Créer la table coaches
 CREATE TABLE coaches(
@@ -127,6 +128,14 @@ CREATE TABLE calendrier(
     samedipm INT,
     FOREIGN KEY (idcoach) REFERENCES coaches(idcoach)
 );
+
+CREATE TABLE donnee{
+    nb INT AUTO_INCREMENT PRIMARY KEY,
+    idclient INT,
+    idcoach INT
+};
+
+INSERT INTO donnee (idclient, idcoach) VALUES (2,4);
 
 -- Insertion des données dans les tables
 INSERT INTO coaches (nom, prenom, specialite, mail, num_salle, tel, photo) VALUES

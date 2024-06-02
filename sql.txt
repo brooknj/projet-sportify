@@ -129,11 +129,11 @@ CREATE TABLE calendrier(
     FOREIGN KEY (idcoach) REFERENCES coaches(idcoach)
 );
 
-CREATE TABLE donnee{
+CREATE TABLE donnee(
     nb INT AUTO_INCREMENT PRIMARY KEY,
     idclient INT,
     idcoach INT
-};
+);
 
 INSERT INTO donnee (idclient, idcoach) VALUES (2,4);
 

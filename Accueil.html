@@ -166,7 +166,7 @@
             margin: 20px auto;
         }
         .carousel img {
-            width: 100%;
+            width: 50%; /* Images deux fois plus petites */
             border-radius: 10px;
         }
     </style>
@@ -554,7 +554,9 @@
             infinite: true,
             speed: 300,
             slidesToShow: 1,
-            adaptiveHeight: true
+            adaptiveHeight: true,
+            autoplay: true,
+            autoplaySpeed: 4000
         });
     });
 

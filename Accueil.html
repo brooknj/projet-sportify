@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -175,7 +174,7 @@
             <div class="custom-select-wrapper">
                 <div class="custom-select" onclick="toggleOptions('servicesOptions')">Nos services</div>
                 <div class="custom-options" id="servicesOptions">
-                    <div class="custom-option" onclick="showSection('personnel')">Personnels de la salle de sport</div>
+                    <div class="custom-option" onclick="showSection('personnel'); loadRespos('responsablesalle', 'affichagesalle.php')">Personnels de la salle de sport</div>
                     <div class="custom-option" onclick="showSection('schedule')">Horaire de la gym</div>
                     <div class="custom-option" onclick="showSection('rules')">Règles sur l'utilisation des machines</div>
                     <div class="custom-option" onclick="showSection('newClients')">Nouveaux clients</div>
@@ -262,16 +261,11 @@
         <div id="personnel" class="content hidden">
             <h3>Personnels de la salle de sport</h3>
             <div class="container">
-                <div class="names_respo">
-                    <ul id="respo-list">
+                <section class="section" id="section1">
+                    <button onclick="loadSection('salle', 'affichagesalle.php')">Salle</button>
+                </section>
+                <section class="section" id="salle"></section>
 
-                    </ul>
-                </div>
-
-                <div class="details" id="respo-details">
-                    <h2>Salle</h2>
-                    <p id="respo-content">Sélectionnez une salle</p>
-                </div>
             </div>
         </div>
         <div id="schedule" class="content hidden">
@@ -759,10 +753,22 @@
         fetch('afficherespos.php?numsalle=' + numsalle)
             .then(response => response.text())
             .then(data => {
-                document.getElementById('respo-content').innerHTML = data;
-                document.getElementById('respo-details').classList.add('show');
+                document.getElementById('detail-content').innerHTML = data;
+                document.getElementById('coach-details').classList.add('show');
             });
     }
+
+    function loadSection2(section, url) {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(section).innerHTML = data;
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
+
+
+
 </script>
 </body>
 </html>

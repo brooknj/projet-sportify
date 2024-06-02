@@ -132,14 +132,14 @@ INSERT INTO coaches (nom, prenom, specialite, mail, num_salle, tel, photo) VALUE
 ('Klinger', 'Julien', 'Tennis', 'julien.klinger@sportify.com', 'C-001', 641490230, 'julien.png'),
 ('Urvoy', 'Mathis', 'Basket', 'mathis.urvoy@sportify.com', 'C-002', 714212835, 'mathis.png'),
 ('Chevalier', 'Alice', 'Cardio-Training', 'alice.chevalier@sporify.com', 'C-003', 624144988, 'alice.png'),
-('Baudy', 'Benjamin', 'Biking', 'benjamin.baudy@sportify.com', 'C-004', 616243240, 'benjamin.png'),
-('Wyka', 'Martin', 'Musculation', 'martin.wyka@sportify.com', 'C-005', 659500718, 'martin.png'),
+('Baudy', 'Benjamin', 'Biking', 'benjamin.baudy@sportify.com', 'C-004', 616243240, 'benjamin.jpeg'),
+('Wyka', 'Martin', 'Musculation', 'martin.wyka@sportify.com', 'C-005', 659500718, 'martin2.jpeg'),
 ('Hoang', 'Laura', 'Fitness', 'laura.hoang@sportify.com', 'C-006', 716506930, 'laura.png'),
 ('Auxfraises', 'Charlotte', 'Cours collectifs', 'charlotte.auxfraises@sportify.com', 'C-007', 654128376, 'charlotte.png'),
 ('Jaccod', 'Bastien', 'Football', 'bastien.jaccod@sportify.com', 'C-008', 688542764, 'bastien.png'),
-('Romeo', 'Alexandre', 'Natation', 'alexandre.romeo@sportify.com', 'C-009', 640826635, 'alexandre.png'),
+('Romeo', 'Alexandre', 'Natation', 'alexandre.romeo@sportify.com', 'C-009', 640826635, 'alexandre.jpeg'),
 ('Migan', 'Aude', 'Plongeon', 'aude.migan@sportify.com', 'C-010', 784305935, 'aude.png'),
-('Berteau', 'Pierre', 'Rugby', 'pierre.berteau@sportify.com', 'C-011', 650403087, 'pierre.png');
+('Berteau', 'Pierre', 'Rugby', 'pierre.berteau@sportify.com', 'C-011', 650403087, 'pierre.jpeg');
 
 INSERT INTO clients (nomclient, prenomclient, emailclient, adresseclient, carteEtudiante) VALUES
 ('Drauchon', 'Paul', 'paul.drochon@sportify.com', '30 rue Moliere', 1),
@@ -211,7 +211,8 @@ INSERT INTO rdv (idclient, idcoach, horaire, jour, salle) VALUES
 (1, 1, '12:30:00', 'jeudi', 'C-001'),
 (1, 1, '13:45:00', 'samedi', 'C-001'),
 (1, 1, '15:00:00', 'samedi', 'C-001'),
-(1, 1, '16:15:00', 'samedi', 'C-001');
+(1, 1, '16:15:00', 'samedi', 'C-001'),
+(1, 2, '17:30:00', 'jeudi', 'C-002');
 
 INSERT INTO messages (text, idcoach, idclient, sens, temps, jour) VALUES
 ('Coucou beau gosse', 1, 1, 0, '10:18:00', '2024-05-30'),

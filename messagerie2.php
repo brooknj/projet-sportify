@@ -6,7 +6,10 @@ $db_found = mysqli_select_db($db_handle, $database);
 $idcoach = intval($_GET['idcoach']);
 $idclient = 1;
 
-$sql = "SELECT * FROM messages JOIN coaches ON messages.idcoach = coaches.idcoach JOIN clients ON messages.idclient = clients.idclient WHERE messages.idcoach = $idcoach AND messages.idclient = $idclient";
+$sql = "SELECT * FROM messages 
+        JOIN coaches ON messages.idcoach = coaches.idcoach 
+        JOIN clients ON messages.idclient = clients.idclient 
+        WHERE messages.idcoach = $idcoach AND messages.idclient = $idclient ORDER BY idmessage";
 $result = mysqli_query($db_handle, $sql);
 
 if ($result->num_rows > 0) {
@@ -23,10 +26,3 @@ if ($result->num_rows > 0) {
 
 mysqli_close($db_handle);
 ?>
-
-<!-- Formulaire pour envoyer un nouveau message -->
-<form action="envoyer_message.php" method="post">
-    <input type="hidden" name="idcoach" value="<?php echo $idcoach; ?>">
-    <textarea name="message" rows="4" cols="50" placeholder="Votre message..."></textarea><br>
-    <input type="submit" value="Envoyer">
-</form>

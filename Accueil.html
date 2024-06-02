@@ -167,8 +167,8 @@
                 <div class="custom-select" onclick="toggleOptions('parcourirOptions')">Tout parcourir</div>
                 <div class="custom-options" id="parcourirOptions">
                     <div class="custom-option" onclick="showSection('sports'); loadSection('coach', 'affichagecoach5.php')">Activités sportives</div>
-                    <div class="custom-option" onclick="showSection('competitive')">Sports compétition</div>
-                    <div class="custom-option" onclick="showSection('gym')">Salle de sport</div>
+                    <div class="custom-option" onclick="showSection('competitive'); loadSection('coach', 'affichagecoach5.php')">Sports compétition</div>
+                    <div class="custom-option" onclick="showSection('gym'); loadSection('coach', 'affichagecoach5.php')">Salle de sport</div>
                 </div>
             </div>
             <a id="buttonrdv" onclick="showSection('appointment')">Rendez-vous</a>
@@ -186,25 +186,58 @@
         <div id="navigation2">
             <a href="#" onclick="showSection('account')"><img src="util.png" alt="Votre Compte" style="height: 40px;"></a>
             <div class="search-bar">
-                <form id="myForm" method="post">
-                    <input type="text" name="recherche" placeholder="Rechercher...">
-                    <button type="submit" name="button1" value="Rechercher" onclick="rechercher()">Rechercher</button>
-                </form>
+                <button type="submit" name="button1" value="Rechercher" onclick="showSection(rechercher)">Rechercher</button>
             </div>
         </div>
     </div>
     <div id="section">
         <div class="container">
-            <section class="section" id="section1">
-                <button onclick="loadSection('coach', 'affichagecoach5.php')">Sports</button>
-            </section>
             <section class="section" id="coach"></section>
             <section class="section" id="details"></section>
-            <section class="section" id="messagerie"></section>
+            <section class="section" id="messagerie">
+                <div id="historique"></div>
+                <div id="newmessage">
+                    <!-- Formulaire pour envoyer un nouveau message -->
+                    <form action="envoyer_message.php" method="post">
+                        <input type="hidden" name="idcoach" value="6">
+                        <input type="text" name="message" placeholder="Votre message...">
+                        <input type="submit" value="Envoyer">
+                    </form>
+                </div>
+            </section>
             <section class="section" id="rdv"></section>
             <section class="section" id="cv"></section>
         </div>
         <div id="listrdv"></div>
+        <div id="rechercher">
+            <h1>Recherche</h1>
+            <form>
+                <table border="0">
+                    <tr>
+                        <td colspan="2" align="center">Recherche :</td>
+                    </tr>
+                    <tr>
+                        <td>Nom :</td>
+                        <td><input type="text" id="nomrech" placeholder="Nom"></td>
+                    </tr>
+                    <tr>
+                        <td>Salle :</td>
+                        <td><input type="text" id="sallerech" placeholder="Salle"></td>
+                    </tr>
+                    <tr>
+                        <td>Spécialité :</td>
+                        <td><input type="text" id="sperech" placeholder="Spécialité"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="button" value="Rechercher" onclick="rechercher()"></td>
+                    </tr>
+                </table>
+            </form>
+
+            <div id="results">
+                <!-- Résultats de la recherche s'afficheront ici -->
+            </div>
+        </div>
         <div id="home" class="content">
             <div class="welcome">
                 <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
@@ -620,6 +653,23 @@
             })
             .catch(error => console.error('Erreur:', error));
     }
+    function rechercher() {
+        var nom = document.getElementById("nomrech").value;
+        var salle = document.getElementById("sallerech").value;
+        var spe = document.getElementById("sperech").value;
+
+        var params = "nomrech=" + encodeURIComponent(nom) + "&sallerech=" + encodeURIComponent(salle) + "&sperech=" + encodeURIComponent(spe);
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById("results").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.open("POST", "recherche.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+    }
 
     function loadDetails(idcoach) {
         fetch('details4.php?idcoach=' + idcoach)
@@ -634,7 +684,7 @@
         fetch('messagerie2.php?idcoach=' + idcoach)
             .then(response => response.text())
             .then(data => {
-                document.getElementById('messagerie').innerHTML = data;
+                document.getElementById('historique').innerHTML = data;
             })
             .catch(error => console.error('Erreur:', error));
     }
@@ -647,6 +697,31 @@
             })
             .catch(error => console.error('Erreur:', error));
     }
+
+    function loadNewMessage(idcoach) {
+        loadMessagerie(idcoach);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('#newmessage form');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche le rechargement de la page
+
+            const formData = new FormData(form);
+            fetch('envoyer_message.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    form.reset(); // Réinitialise le formulaire
+                    const idcoach = formData.get('idcoach');
+                    loadNewMessage(idcoach); // Recharge la section messagerie
+                })
+                .catch(error => console.error('Erreur:', error));
+        });
+    });
 
     document.getElementById('buttonrdv').addEventListener('click', function() {
         var idclient = 2; // Valeur prédéfinie

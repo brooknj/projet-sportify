@@ -121,6 +121,23 @@
             text-align: center;
             border: 1px solid #ddd;
         }
+        .service-card {
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid #808080;
+            border-radius: 10px;
+            background-color: #E0E0E0;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .service-card:hover {
+            background-color: #D0D0D0;
+        }
     </style>
 </head>
 <body>
@@ -185,13 +202,21 @@
         </div>
         <div id="services" class="content hidden">
             <h3>Nos Services</h3>
-            <ul>
-                <li><a onclick="showSection('personnel')">Personnels de la salle de sport</a></li>
-                <li><a onclick="showSection('schedule')">Horaire de la gym</a></li>
-                <li><a onclick="showSection('rules')">Règles sur l'utilisation des machines</a></li>
-                <li><a onclick="showSection('newClients')">Nouveaux clients</a></li>
-                <li><a onclick="showSection('nutrition')">Alimentation et nutrition</a></li>
-            </ul>
+            <div class="service-card" onclick="showSection('personnel')">
+                <p>Personnels de la salle de sport</p>
+            </div>
+            <div class="service-card" onclick="showSection('schedule')">
+                <p>Horaire de la gym</p>
+            </div>
+            <div class="service-card" onclick="showSection('rules')">
+                <p>Règles sur l'utilisation des machines</p>
+            </div>
+            <div class="service-card" onclick="showSection('newClients')">
+                <p>Nouveaux clients</p>
+            </div>
+            <div class="service-card" onclick="showSection('nutrition')">
+                <p>Alimentation et nutrition</p>
+            </div>
         </div>
         <div id="personnel" class="content hidden">
             <h3>Personnels de la salle de sport</h3>
@@ -458,9 +483,6 @@
         options.classList.toggle('active');
     }
 
-
-
-
     function resetSearchResults() {
         document.getElementById('recherche').innerHTML = '';
     }
@@ -532,57 +554,57 @@
     }
 
     function loadSection(section, url) {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(section).innerHTML = data;
-                })
-                .catch(error => console.error('Erreur:', error));
-        }
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(section).innerHTML = data;
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
 
-        function loadDetails(idcoach) {
-            fetch('details4.php?idcoach=' + idcoach)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('details').innerHTML = data;
-                })
-                .catch(error => console.error('Erreur:', error));
-        }
+    function loadDetails(idcoach) {
+        fetch('details4.php?idcoach=' + idcoach)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('details').innerHTML = data;
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
 
-        function loadMessagerie(idcoach) {
-            fetch('messagerie2.php?idcoach=' + idcoach)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('messagerie').innerHTML = data;
-                })
-                .catch(error => console.error('Erreur:', error));
-        }
-        function loadRdv(idcoach) {
-            fetch('calendrier2.php?idcoach=' + idcoach)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('rdv').innerHTML = data;
-                })
-                .catch(error => console.error('Erreur:', error));
-        }
+    function loadMessagerie(idcoach) {
+        fetch('messagerie2.php?idcoach=' + idcoach)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('messagerie').innerHTML = data;
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
+
+    function loadRdv(idcoach) {
+        fetch('calendrier2.php?idcoach=' + idcoach)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('rdv').innerHTML = data;
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
 
     document.getElementById('buttonrdv').addEventListener('click', function() {
-            var idclient = 2; // Valeur prédéfinie
+        var idclient = 2; // Valeur prédéfinie
 
-            var formData = new FormData();
-            formData.append('idclient', idclient);
+        var formData = new FormData();
+        formData.append('idclient', idclient);
 
-            fetch('afficherdv.php', {
-                method: 'POST',
-                body: formData
-            })
+        fetch('afficherdv.php', {
+            method: 'POST',
+            body: formData
+        })
             .then(response => response.text())
             .then(data => {
                 document.getElementById('listrdv').innerHTML = data;
             })
             .catch(error => console.error('Erreur:', error));
-        });
-
+    });
 </script>
 </body>
 </html>

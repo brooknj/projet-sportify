@@ -261,7 +261,28 @@
         </div>
         <div id="personnel" class="content hidden">
             <h3>Personnels de la salle de sport</h3>
-            <!-- Contenu des personnels -->
+            <div class="container">
+                <div class="names_respo">
+                    <ul id="respo-list">
+                        <?php
+                        if ($query_result->num_rows > 0) {
+                        // Afficher les noms des coaches
+                        while($row = $query_result->fetch_assoc()) {
+                        echo '<li onclick="loadSalle(' . $row["numsalle"] . ')">' . $row["numsalle"] . ' ' . $row["photosalle"] . '</li>';
+                        }
+                        } else {
+                        echo "0 results";
+                        }
+                        mysqli_close($db_handle);
+                        ?>
+                    </ul>
+                </div>
+
+                <div class="details" id="respo-details">
+                    <h2>Salle</h2>
+                    <p id="respo-content">Sélectionnez une salle</p>
+                </div>
+            </div>
         </div>
         <div id="schedule" class="content hidden">
             <h3>Horaire de la gym</h3>
@@ -743,6 +764,15 @@
             })
             .catch(error => console.error('Erreur:', error));
     });
+
+    function loadSalle(numsalle) {
+        fetch('afficherespos.php?numsalle=' + numsalle)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('respo-content').innerHTML = data;
+                document.getElementById('respo-details').classList.add('show');
+            });
+    }
 </script>
 </body>
 </html>

@@ -183,63 +183,15 @@
             </div>
         </div>
         <div id="navigation2">
-            <a href="#" onclick="showSection('account')"><img src="util.png" alt="Votre Compte" style="height: 40px;"></a>
+            <a href="login.html"><img src="util.png" alt="Votre Compte" style="height: 40px;"></a>
             <div class="search-bar">
-                <button type="submit" name="button1" value="Rechercher" onclick="showSection(rechercher)">Rechercher</button>
+                <button type="submit" name="button1" value="Rechercher" onclick="showSection(rechercher)"><img src="loupe.png" style="height: 40px;"></button>
             </div>
         </div>
     </div>
     <div id="section">
 
-        <div id="listrdv"></div>
-        <div id="rechercher">
-            <h1>Recherche</h1>
-            <form>
-                <table border="0">
-                    <tr>
-                        <td colspan="2" align="center">Recherche :</td>
-                    </tr>
-                    <tr>
-                        <td>Nom :</td>
-                        <td><input type="text" id="nomrech" placeholder="Nom"></td>
-                    </tr>
-                    <tr>
-                        <td>Salle :</td>
-                        <td><input type="text" id="sallerech" placeholder="Salle"></td>
-                    </tr>
-                    <tr>
-                        <td>Spécialité :</td>
-                        <td><input type="text" id="sperech" placeholder="Spécialité"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><input type="button" value="Rechercher" onclick="rechercher()"></td>
-                    </tr>
-                </table>
-            </form>
-
-            <div id="results">
-                <!-- Résultats de la recherche s'afficheront ici -->
-            </div>
-        </div>
-        <div id="home" class="content">
-            <div class="welcome">
-                <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
-            </div>
-            <div class="event">
-                <h2>Évènement de la semaine</h2>
-                <p>Ne manquez pas notre match! Le classico des post-bac!</p>
-                <div class="match">
-                    <img src="ece.png" alt="ECE Logo">
-                    <img src="vs.png" alt="vs">
-                    <img src="esilv.png" alt="ESILV Logo">
-                </div>
-            </div>
-            <div class="carousel">
-                <img src="specialist1.jpg" alt="Specialist 1">
-                <img src="specialist2.jpg" alt="Specialist 2">
-                <img src="specialist3.jpg" alt="Specialist 3">
-            </div>
-        </div>
+        
         <div id="services" class="content hidden">
             <h3>Nos Services</h3>
             <div class="service-card" onclick="showSection('personnel')">
@@ -265,7 +217,7 @@
                     <button onclick="loadSection('salle', 'affichagesalle.php')">Salle</button>
                 </section>
                 <section class="section" id="salle"></section>
-
+                
             </div>
         </div>
         <div id="schedule" class="content hidden">
@@ -374,113 +326,6 @@
                 <p>Après le sport d’endurance, tu dois recharger les batterie. Mange un repas riches en hydrates de carbone et en protéines.</p>
             </div>
         </div>
-        <div id="account" class="content hidden">
-            <div id="acccount" class="container">
-                <div class="pave">
-                    <form id="myFormco">
-                        <table>
-                            <tr>
-                                <td colspan="2" align="center">Se connecter</td>
-                            </tr>
-                            <tr>
-                                <td>Nom :</td>
-                                <td><input type="text" name="nom"></td>
-                            </tr>
-                            <tr>
-                                <td>Prénom :</td>
-                                <td><input type="text" name="prenom"></td>
-                            </tr>
-                            <tr>
-                                <td>Adresse :</td>
-                                <td><input type="text" name="adresse"></td>
-                            </tr>
-                            <tr>
-                                <td>Courriel :</td>
-                                <td><input type="text" name="mail"></td>
-                            </tr>
-                            <tr>
-                                <td>Carte étudiante :</td>
-                                <td><input type="password" name="carteEtu" id="carteEtudiante"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    <input type="submit" name="buttonco" value="Valider">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    <button type="button" onclick="showSection('createAccount')">Créer un compte</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="createAccount" class="content hidden">
-            <div class="container">
-                <div class="pave">
-                    <form id="myFormCreateAccount">
-                        <table>
-                            <tr>
-                                <td colspan="2" align="center">Créer un compte</td>
-                            </tr>
-                            <tr>
-                                <td>Nom :</td>
-                                <td><input type="text" name="nom"></td>
-                            </tr>
-                            <tr>
-                                <td>Prénom :</td>
-                                <td><input type="text" name="prenom"></td>
-                            </tr>
-                            <tr>
-                                <td>Adresse :</td>
-                                <td><input type="text" name="adresse"></td>
-                            </tr>
-                            <tr>
-                                <td>Courriel :</td>
-                                <td><input type="text" name="mail"></td>
-                            </tr>
-                            <tr>
-                                <td>Carte étudiante :</td>
-                                <td><input type="password" name="carteEtudiante"></td>
-                            </tr>
-                            <tr>
-                                <td>Numéro de téléphone :</td>
-                                <td><input type="text" name="telephone"></td>
-                            </tr>
-                            <tr>
-                                <td>Mot de passe :</td>
-                                <td><input type="password" name="password"></td>
-                            </tr>
-                            <tr>
-                                <td>Confirmer le mot de passe :</td>
-                                <td><input type="password" name="confirmPassword"></td>
-                            </tr>
-                            <tr>
-                                <td>Sexe :</td>
-                                <td>
-                                    <select name="sexe">
-                                        <option value="Homme">Homme</option>
-                                        <option value="Femme">Femme</option>
-                                        <option value="Autre">Autre</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Date de naissance :</td>
-                                <td><input type="date" name="dateNaissance"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    <input type="submit" name="buttonCreateAccount" value="Créer le compte">
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-        </div>
         <div id="sports" class="content hidden">
             <h3>Activités sportives</h3>
             <ul>
@@ -545,6 +390,55 @@
             <p>Bureau: Salle 103</p>
             <p>Disponibilité: Mercredi - Dimanche</p>
             <p>CV: <a href="paul_cv.pdf" target="_blank">Télécharger le CV</a></p>
+        </div>
+        <div id="listrdv"></div>
+        <div id="rechercher">
+            <h1>Recherche</h1>
+            <form>
+                <table border="0">
+                    <tr>
+                        <td colspan="2" align="center">Recherche :</td>
+                    </tr>
+                    <tr>
+                        <td>Nom :</td>
+                        <td><input type="text" id="nomrech" placeholder="Nom"></td>
+                    </tr>
+                    <tr>
+                        <td>Salle :</td>
+                        <td><input type="text" id="sallerech" placeholder="Salle"></td>
+                    </tr>
+                    <tr>
+                        <td>Spécialité :</td>
+                        <td><input type="text" id="sperech" placeholder="Spécialité"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="button" value="Rechercher" onclick="rechercher()"></td>
+                    </tr>
+                </table>
+            </form>
+
+            <div id="results">
+                <!-- Résultats de la recherche s'afficheront ici -->
+            </div>
+        </div>
+        <div id="home" class="content">
+            <div class="welcome">
+                <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
+            </div>
+            <div class="event">
+                <h2>Évènement de la semaine</h2>
+                <p>Ne manquez pas notre match! Le classico des post-bac!</p>
+                <div class="match">
+                    <img src="ece.png" alt="ECE Logo">
+                    <img src="vs.png" alt="vs">
+                    <img src="esilv.png" alt="ESILV Logo">
+                </div>
+            </div>
+            <div class="carousel">
+                <img src="specialist1.jpg" alt="Specialist 1">
+                <img src="specialist2.jpg" alt="Specialist 2">
+                <img src="specialist3.jpg" alt="Specialist 3">
+            </div>
         </div>
         <div id="searchResults" class="content hidden">
             <div id="recherche"></div>
@@ -750,22 +644,22 @@
     });
 
     function loadSalle(numsalle) {
-        fetch('afficherespos.php?numsalle=' + numsalle)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('detail-content').innerHTML = data;
-                document.getElementById('coach-details').classList.add('show');
-            });
-    }
+            fetch('afficherespos.php?numsalle=' + numsalle)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('detail-content').innerHTML = data;
+                    document.getElementById('coach-details').classList.add('show');
+                });
+        }
 
-    function loadSection2(section, url) {
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById(section).innerHTML = data;
-            })
-            .catch(error => console.error('Erreur:', error));
-    }
+ function loadSection2(section, url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(section).innerHTML = data;
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
 
 
 

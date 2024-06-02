@@ -72,10 +72,11 @@ $result = mysqli_query($db_handle, $sql);
                 <?php
                 if ($result->num_rows > 0) {
                     // Afficher les noms des coaches
-                    while($row = $result->fetch_assoc()) {
-                        echo '<li onclick="loadSalle(\'' . $row["numsalle"] . '\')">' . $row["numsalle"] . ' ' . $row["photosalle"] . '</li>';
-
+                   while($row = $result->fetch_assoc()) {
+                        $image = $row['photosalle'];
+                        echo '<li onclick="loadSalle(\'' . $row["numsalle"] . '\')">' . $row["numsalle"] . ' <img src="' . $image . '" height="60" width="80"></li>';
                     }
+                                    
                 } else {
                     echo "0 results";
                 }

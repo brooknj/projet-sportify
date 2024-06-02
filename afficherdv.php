@@ -16,28 +16,24 @@
         $erreur = false;
         $errorMessage = "";
 
-        $sql = "SELECT * FROM rdv WHERE idclient = $idclient";
+        $sql = "SELECT * FROM rdv JOIN coaches ON coaches.idcoach=rdv.idcoach WHERE idclient = $idclient";
         
         if (!$erreur){
             echo "<h1>Listes RDV</h1>";
-            echo "<p>Requete: " . $sql . "<br>";
-            echo "Résultat: </p>";
             $result = mysqli_query($db_handle, $sql);
             echo "<table border=\"1\">";
             echo "<tr>";
-            echo "<th>idrdv</th>";
-            echo "<th>idclient</th>";
-            echo "<th>idcoach</th>";
-            echo "<th>horaire</th>";
-            echo "<th>jour</th>";
-            echo "<th>salle</th>";
+            echo "<th>Nom</th>";
+            echo "<th>Prénom</th>";
+            echo "<th>Horaire</th>";
+            echo "<th>Jour</th>";
+            echo "<th>Salle</th>";
             echo "</tr>";
 
             while ($data = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
-                echo "<td>" . $data['idrdv'] . "</td>";
-                echo "<td>" . $data['idclient'] . "</td>";
-                echo "<td>" . $data['idcoach'] . "</td>";
+                echo "<td>" . $data['nom'] . "</td>";
+                echo "<td>" . $data['prenom'] . "</td>";
                 echo "<td>" . $data['horaire'] . "</td>";
                 echo "<td>" . $data['jour'] . "</td>";
                 echo "<td>" . $data['salle'] . "</td>";

@@ -32,7 +32,8 @@ CREATE TABLE coaches(
 
 -- Créer la table salles
 CREATE TABLE salles(
-    numsalle VARCHAR(20) PRIMARY KEY,
+idsalle INT AUTO_INCREMENT PRIMARY KEY,
+    numsalle VARCHAR(20),
     adressesalle VARCHAR(50),
     mailsalle VARCHAR(50),
     photosalle VARCHAR(20),
@@ -90,7 +91,7 @@ CREATE TABLE admins (
 
 -- Créer la table respos
 CREATE TABLE respos (
-    idrespo INT PRIMARY KEY,
+    idrespo INT AUTO_INCREMENT PRIMARY KEY,
     salle VARCHAR(20),
     nom VARCHAR(20),
     prenom VARCHAR(20),
@@ -141,6 +142,21 @@ INSERT INTO coaches (nom, prenom, specialite, mail, num_salle, tel, photo) VALUE
 ('Migan', 'Aude', 'Plongeon', 'aude.migan@sportify.com', 'C-010', 784305935, 'aude.png'),
 ('Berteau', 'Pierre', 'Rugby', 'pierre.berteau@sportify.com', 'C-011', 650403087, 'pierre.jpeg');
 
+
+INSERT INTO salles (numsalle, adressesalle, mailsalle, photosalle, telsalle, horairesalle) VALUES
+('C-001', '123 Rue de Rivoli, Paris', 'c001@sportify.com', 'c001.jpg', 0612345678, '9h00 - 18h00'),
+('C-002', '456 Rue Saint-Honoré, Paris', 'c002@sportify.com', 'c002.jpg', 0612345679, '8h00 - 17h00'),
+('C-003', '789 Avenue des Champs-Élysées, Paris', 'c003@sportify.com', 'c003.jpg', 0612345680, '10h00 - 19h00'),
+('C-004', '1011 Rue de la Paix, Paris', 'c004@sportify.com', 'c004.jpg', 0612345681, '9h30 - 18h30'),
+('C-005', '1213 Boulevard Haussmann, Paris', 'c005@sportify.com', 'c005.jpg', 0612345682, '8h30 - 17h30'),
+('C-006', '1415 Rue du Faubourg Saint-Honoré, Paris', 'c006@sportify.com', 'c006.jpg', 0612345683, '10h30 - 19h30'),
+('C-007', '1617 Avenue de l Opéra, Paris', 'c007@sportify.com', 'c007.jpg', 0612345684, '9h00 - 18h00'),
+('C-008', '1819 Rue de Rennes, Paris', 'c008@sportify.com', 'c008.jpg', 0612345685, '8h00 - 17h00'),
+('C-009', '2021 Rue de Sèvres, Paris', 'c009@sportify.com', 'c009.jpg', 0612345686, '10h00 - 19h00'),
+('C-010', '2223 Rue de la Pompe, Paris', 'c010@sportify.com', 'c010.jpg', 0612345687, '9h30 - 18h30'),
+('C-011', '2425 Avenue Montaigne, Paris', 'c011@sportify.com', 'c011.jpg', 0612345688, '8h30 - 17h30');
+
+
 INSERT INTO clients (nomclient, prenomclient, emailclient, adresseclient, carteEtudiante) VALUES
 ('Drauchon', 'Paul', 'paul.drochon@sportify.com', '30 rue Moliere', 1),
 ('Rossi', 'Elara', 'elara.rossi@sportify.com', '42 Rue de Rivoli, Paris', 2),
@@ -160,11 +176,34 @@ INSERT INTO admins (idadmin, nom, prenom, email) VALUES
 (3, 'Nkengoue', 'Brooklyn', 'brooklyn.nkengoue@sportify.com'),
 (4, 'Puel', 'Thibaut', 'thibaut.puel@sportify.com');
 
-INSERT INTO respos (idrespo, salle, nom, prenom, email, tel) VALUES
-(1, 'C-001', 'Bricout', 'Théodore', 'theodore.bricout@sportify.com', 633432681),
-(2, 'C-002', 'Siritham', 'Evan', 'evan.siritham@sportify.com', 654424874),
-(3, 'C-003', 'Quaranta', 'Benoit', 'benoit.quaranta@sportify.com', 646511873),
-(4, 'C-004', 'Petit', 'Laure', 'laure.petit@sportify.com', 745426884);
+INSERT INTO respos (salle, nom, prenom, email, tel) VALUES
+('C-001', 'Bricout', 'Théodore', 'theodore.bricout@sportify.com', 633432681),
+('C-002', 'Siritham', 'Evan', 'evan.siritham@sportify.com', 654424874),
+('C-003', 'Quaranta', 'Benoit', 'benoit.quaranta@sportify.com', 646511873),
+('C-004', 'Petit', 'Laure', 'laure.petit@sportify.com', 745426884),
+('C-001', 'Chaplin', 'Charlie', 'charlie.chaplin@sportify.com', 0612345678),
+('C-001', 'Monroe', 'Marilyn', 'marilyn.monroe@sportify.com', 0612345679),
+('C-002', 'Gandhi', 'Mahatma', 'mahatma.gandhi@sportify.com', 0612345680),
+('C-002', 'Mandela', 'Nelson', 'nelson.mandela@sportify.com', 0612345681),
+('C-003', 'Hepburn', 'Audrey', 'audrey.hepburn@sportify.com', 0612345682),
+('C-003', 'Piaf', 'Edith', 'edith.piaf@sportify.com', 0612345683),
+('C-004', 'Einstein', 'Albert', 'albert.einstein@sportify.com', 0612345684),
+('C-004', 'Curie', 'Marie', 'marie.curie@sportify.com', 0612345685),
+('C-005', 'Luther King', 'Martin', 'martin.lutherking@sportify.com', 0612345686),
+('C-005', 'Kennedy', 'John', 'john.kennedy@sportify.com', 0612345687),
+('C-006', 'Ali', 'Muhammad', 'muhammad.ali@sportify.com', 0612345688),
+('C-006', 'Jordan', 'Michael', 'michael.jordan@sportify.com', 0612345689),
+('C-007', 'Disney', 'Walt', 'walt.disney@sportify.com', 0612345690),
+('C-007', 'Picasso', 'Pablo', 'pablo.picasso@sportify.com', 0612345691),
+('C-008', 'De Gaulle', 'Charles', 'charles.degaulle@sportify.com', 0612345692),
+('C-008', 'Chirac', 'Jacques', 'jacques.chirac@sportify.com', 0612345693),
+('C-009', 'Mitterrand', 'Francois', 'francois.mitterrand@sportify.com', 0612345694),
+('C-009', 'Bonaparte', 'Napoleon', 'napoleon.bonaparte@sportify.com', 0612345695),
+('C-010', 'Bourdain', 'Anthony', 'anthony.bourdain@sportify.com', 0612345696),
+('C-010', 'Carlin', 'George', 'george.carlin@sportify.com', 0612345697),
+('C-011', 'Williams', 'Robin', 'robin.williams@sportify.com', 0612345698),
+('C-011', 'Chappelle', 'Dave', 'dave.chappelle@sportify.com', 0612345699);
+
 
 INSERT INTO calendrier (idcoach, lundiam, lundipm, mardiam, mardipm, mercrediam, mercredipm, jeudiam, jeudipm, vendrediam, vendredipm, samediam, samedipm) VALUES
 (1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1),
@@ -214,8 +253,12 @@ INSERT INTO rdv (idclient, idcoach, horaire, jour, salle) VALUES
 (1, 1, '16:15:00', 'samedi', 'C-001'),
 (1, 2, '17:30:00', 'jeudi', 'C-002');
 
+
 INSERT INTO messages (text, idcoach, idclient, sens, temps, jour) VALUES
 ('Coucou beau gosse', 1, 1, 0, '10:18:00', '2024-05-30'),
 ('Bonjour', 1, 1, 1, '10:19:00', '2024-05-30'),
 ('Tu peux me faire un cours de sport', 1, 1, 0, '10:20:00', '2024-05-30'),
 ('Coucou beau gosse 2.0', 2, 1, 0, '10:21:00', '2024-05-30');
+
+
+

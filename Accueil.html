@@ -264,17 +264,7 @@
             <div class="container">
                 <div class="names_respo">
                     <ul id="respo-list">
-                        <?php
-                        if ($query_result->num_rows > 0) {
-                        // Afficher les noms des coaches
-                        while($row = $query_result->fetch_assoc()) {
-                        echo '<li onclick="loadSalle(' . $row["numsalle"] . ')">' . $row["numsalle"] . ' ' . $row["photosalle"] . '</li>';
-                        }
-                        } else {
-                        echo "0 results";
-                        }
-                        mysqli_close($db_handle);
-                        ?>
+
                     </ul>
                 </div>
 

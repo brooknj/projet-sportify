@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Sportify: Consultation Sportive</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -159,7 +161,17 @@
         .rules p, .nutrition p {
             margin-bottom: 10px;
         }
+        .carousel {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .carousel img {
+            width: 100%;
+            border-radius: 10px;
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -197,8 +209,25 @@
         </div>
     </div>
     <div id="section">
-
-        
+        <div id="home" class="content">
+            <div class="welcome">
+                <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
+            </div>
+            <div class="event">
+                <h2>Évènement de la semaine</h2>
+                <p>Ne manquez pas notre match! Le classico des post-bac!</p>
+                <div class="match">
+                    <img src="ece.png" alt="ECE Logo">
+                    <img src="vs.png" alt="vs">
+                    <img src="esilv.png" alt="ESILV Logo">
+                </div>
+            </div>
+            <div class="carousel">
+                <div><img src="specialist1.jpg" alt="Specialist 1"></div>
+                <div><img src="specialist2.jpg" alt="Specialist 2"></div>
+                <div><img src="specialist3.jpg" alt="Specialist 3"></div>
+            </div>
+        </div>
         <div id="services" class="content hidden">
             <h3>Nos Services</h3>
             <div class="service-card" onclick="showSection('personnel')">
@@ -224,7 +253,6 @@
                     <button onclick="loadSection('salle', 'affichagesalle.php')">Salle</button>
                 </section>
                 <section class="section" id="salle"></section>
-                
             </div>
         </div>
         <div id="schedule" class="content hidden">
@@ -286,14 +314,14 @@
                 <p>Laissez les appareils disponibles pour les autres si vous ne les utilisez pas de manière active.</p>
 
                 <h4>NOUS VOULONS UN CLUB SÛR POUR CHACUN</h4>
-                <p>Il est obligatoire de présenter l’original de la carte sportify valide pour entrer dans le club.</p>
+                <p>Il est obligatoire de présenter l’original de la carte Sportify valide pour entrer dans le club.</p>
                 <p>Les enfants de moins de 16 ans ne sont pas admis dans le club.</p>
-                <p>Les instructions du personnel de sportify doivent être respectées et suivies. sportify est habilité, s’il a des motifs raisonnables de le faire, à refuser temporairement ou définitivement l’accès au(x) club(s) aux personnes qui ne respecteraient pas les conditions générales et/ou le règlement intérieur.</p>
+                <p>Les instructions du personnel de Sportify doivent être respectées et suivies. Sportify est habilité, s’il a des motifs raisonnables de le faire, à refuser temporairement ou définitivement l’accès au(x) club(s) aux personnes qui ne respecteraient pas les conditions générales et/ou le règlement intérieur.</p>
                 <p>Assurez-vous de savoir comment utiliser les appareils et faire les exercices. Respectez vos limites et veillez à connaître ce dont vous êtes capable, éventuellement avec les conseils d’un spécialiste (médical). Vous êtes responsable de votre propre bien-être.</p>
                 <p>N’utilisez un appareil que pour l’usage auquel il est destiné et, après l’exercice, éteignez l’appareil ou remettez le matériel à l’endroit prévu à cet effet.</p>
-                <p>Les effets personnels non nécessaires à la pratique du sport tels que manteaux, sacs, casques etcetera, ne peuvent être emmenés dans les espaces d’entraînement, ils doivent être rangés dans les casiers. Nous vous conseillons de ne pas emporter d’objets de valeur et d’utiliser les casiers pour ranger vos affaires. Les casiers sont vidés tous les jours. Pour la responsabilité en cas de dommage ou de vol, nous vous renvoyons aux conditions générales en vigueur de sportify.</p>
+                <p>Les effets personnels non nécessaires à la pratique du sport tels que manteaux, sacs, casques etcetera, ne peuvent être emmenés dans les espaces d’entraînement, ils doivent être rangés dans les casiers. Nous vous conseillons de ne pas emporter d’objets de valeur et d’utiliser les casiers pour ranger vos affaires. Les casiers sont vidés tous les jours. Pour la responsabilité en cas de dommage ou de vol, nous vous renvoyons aux conditions générales en vigueur de Sportify.</p>
                 <p>Après la douche, séchez-vous dans la zone humide du vestiaire pour éviter les chutes et les salissures inutiles dans les vestiaires. Pour des raisons d’hygiène, il n’est pas autorisé de se raser dans les vestiaires.</p>
-                <p>Les activités de vente et/ou de promotion ainsi que le coaching personnel ne sont pas autorisés sans l’accord préalable et écrit de sportify.</p>
+                <p>Les activités de vente et/ou de promotion ainsi que le coaching personnel ne sont pas autorisés sans l’accord préalable et écrit de Sportify.</p>
 
                 <h4>Utilisation des machines</h4>
                 <p>Se rendre dans une salle de sport pour la première fois peut générer une certaine appréhension. Pourquoi utiliser tous ces appareils de fitness ? Quels sont les plus efficaces ? Quels bénéfices puis-je tirer de chacun d’eux ? La réponse à ces questions dépend bien entendu des résultats que vous souhaitez obtenir.</p>
@@ -312,7 +340,7 @@
                 <h4>6. Rameur (cardio)</h4>
                 <p>Pour muscler le corps dans sa totalité et améliorer son endurance. En utilisant le rameur, vous entraînez à la fois le bas et le haut du corps et par conséquent, vous maintenez une bonne forme physique.</p>
                 <p>En règle générale, commencez l’entraînement en travaillant des grands groupes de muscles, puis terminez avec des entraînements plus concrets qui agissent sur les muscles plus petits. Par exemple, entraînez les grands muscles de votre dos avec le lat pull-down, la presse horizontale et la barre des triceps, puis terminez par le banc de presse et la barre de biceps. Quels appareils de fitness vous tentent le plus ?</p>
-                <p>Par quelle machine démarrez-vous ? Regardez dans l'application sportify pour choisir des sessions d’entraînement !</p>
+                <p>Par quelle machine démarrez-vous ? Regardez dans l'application Sportify pour choisir des sessions d’entraînement !</p>
             </div>
         </div>
         <div id="newClients" class="content hidden">
@@ -380,7 +408,6 @@
                 <section class="section">
                     <button onclick="loadSection('coach', 'affichagecoach5.php')">Sports</button>
                 </section>
-
             </div>
         </div>
         <div id="gym" class="content hidden">
@@ -391,7 +418,6 @@
                 <li>Horaire de la gym</li>
                 <li>Questionnaires pour les nouveaux utilisateurs</li>
             </ul>
-            
         </div>
         <div id="listrdv"></div>
         <div id="rechercher">
@@ -422,28 +448,6 @@
             <div id="results">
                 <!-- Résultats de la recherche s'afficheront ici -->
             </div>
-        </div>
-        <div id="home" class="content">
-            <div class="welcome">
-                <p>Bienvenue sur Sportify! Nous sommes ravis de vous accueillir. Découvrez nos services et nos experts sportifs.</p>
-            </div>
-            <div class="event">
-                <h2>Évènement de la semaine</h2>
-                <p>Ne manquez pas notre match! Le classico des post-bac!</p>
-                <div class="match">
-                    <img src="ece.png" alt="ECE Logo">
-                    <img src="vs.png" alt="vs">
-                    <img src="esilv.png" alt="ESILV Logo">
-                </div>
-            </div>
-            <div class="carousel">
-                <img src="specialist1.jpg" alt="Specialist 1">
-                <img src="specialist2.jpg" alt="Specialist 2">
-                <img src="specialist3.jpg" alt="Specialist 3">
-            </div>
-        </div>
-        <div id="searchResults" class="content hidden">
-            <div id="recherche"></div>
         </div>
     </div>
     <div id="footer">
@@ -543,6 +547,15 @@
                 }
             });
         });
+
+        // Initialiser le carrousel
+        $('.carousel').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            adaptiveHeight: true
+        });
     });
 
     function bookSlot(time) {
@@ -558,6 +571,7 @@
             })
             .catch(error => console.error('Erreur:', error));
     }
+
     function rechercher() {
         var nom = document.getElementById("nomrech").value;
         var salle = document.getElementById("sallerech").value;
@@ -646,25 +660,22 @@
     });
 
     function loadSalle(numsalle) {
-            fetch('afficherespos.php?numsalle=' + numsalle)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('detail-content').innerHTML = data;
-                    document.getElementById('coach-details').classList.add('show');
-                });
-        }
+        fetch('afficherespos.php?numsalle=' + numsalle)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('detail-content').innerHTML = data;
+                document.getElementById('coach-details').classList.add('show');
+            });
+    }
 
- function loadSection2(section, url) {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(section).innerHTML = data;
-                })
-                .catch(error => console.error('Erreur:', error));
-        }
-
-
-
+    function loadSection2(section, url) {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(section).innerHTML = data;
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
 </script>
 </body>
 </html>

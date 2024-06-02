@@ -191,23 +191,7 @@
         </div>
     </div>
     <div id="section">
-        <div class="container">
-            <section class="section" id="coach"></section>
-            <section class="section" id="details"></section>
-            <section class="section" id="messagerie">
-                <div id="historique"></div>
-                <div id="newmessage">
-                    <!-- Formulaire pour envoyer un nouveau message -->
-                    <form action="envoyer_message.php" method="post">
-                        <input type="hidden" name="idcoach" value="6">
-                        <input type="text" name="message" placeholder="Votre message...">
-                        <input type="submit" value="Envoyer">
-                    </form>
-                </div>
-            </section>
-            <section class="section" id="rdv"></section>
-            <section class="section" id="cv"></section>
-        </div>
+
         <div id="listrdv"></div>
         <div id="rechercher">
             <h1>Recherche</h1>
@@ -503,6 +487,26 @@
             </ul>
             <div id="coaches_AS">
                 <!--Affichages des coaches via le fichier affichagecoach.php-->
+            </div>
+            <div class="container">
+                <section class="section" id="section1">
+                    <button onclick="loadSection('coach', 'affichagecoach5.php')">Sports</button>
+                </section>
+                <section class="section" id="coach"></section>
+                <section class="section" id="details"></section>
+                <section class="section" id="messagerie">
+                    <div id="historique"></div>
+                    <div id="newmessage">
+                        <!-- Formulaire pour envoyer un nouveau message -->
+                        <form action="envoyer_message.php" method="post">
+                            <input type="hidden" name="idcoach" value="6">
+                            <input type="text" name="message" placeholder="Votre message...">
+                            <input type="submit" value="Envoyer">
+                        </form>
+                    </div>
+                </section>
+                <section class="section" id="rdv"></section>
+                <section class="section" id="cv"></section>
             </div>
         </div>
         <div id="competitive" class="content hidden">

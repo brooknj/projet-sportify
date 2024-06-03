@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Utilisateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #76D2FF;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 50px;
+        }
+        #register-wrapper {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        #register-wrapper h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .form-group input, .form-group select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #76D2FF;
+            box-shadow: 0 0 8px #76D2FF;
+        }
+        .form-group label {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            transition: all 0.3s;
+            background: #fff;
+            padding: 0 5px;
+            color: #aaa;
+        }
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group select:focus + label,
+        .form-group select:not([value=""]) + label {
+            top: -10px;
+            left: 10px;
+            color: #76D2FF;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        #register-wrapper input[type="submit"] {
+            background-color: #E0E0E0;
+            border: 2px solid #808080;
+            color: black;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #register-wrapper input[type="submit"]:hover {
+            background-color: #D0D0D0;
+        }
+        #register-wrapper a {
+            color: #76D2FF;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: color 0.3s;
+        }
+        #register-wrapper a:hover {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<div id="register-wrapper">
+    <h2>Inscription</h2>
+    <form action="register.php" method="post">
+        <div class="form-group">
+            <input type="text" id="nom" name="nom" placeholder=" " required>
+            <label for="nom">Nom</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="prenom" name="prenom" placeholder=" " required>
+            <label for="prenom">Prénom</label>
+        </div>
+        <div class="form-group">
+            <input type="email" id="email" name="email" placeholder=" " required>
+            <label for="email">Adresse E-mail</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="adresse_postale" name="adresse_postale" placeholder=" " required>
+            <label for="adresse_postale">Adresse Postale</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="ville" name="ville" placeholder=" " required>
+            <label for="ville">Ville</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="code_postal" name="code_postal" placeholder=" " required>
+            <label for="code_postal">Code Postal</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="pays" name="pays" placeholder=" " required>
+            <label for="pays">Pays</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="tel" name="tel" placeholder=" " required>
+            <label for="tel">Téléphone</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="carte_etudiant" name="carte_etudiant" placeholder=" " required>
+            <label for="carte_etudiant">Carte Étudiant</label>
+        </div>
+        <div class="form-group">
+            <select id="type_carte" name="type_carte" required>
+                <option value="" disabled selected hidden></option>
+                <option value="Visa">Visa</option>
+                <option value="Mastercard">Mastercard</option>
+                <option value="American Express">American Express</option>
+                <option value="PayPal">PayPal</option>
+            </select>
+            <label for="type_carte">Type de Carte</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="num_carte" name="num_carte" placeholder=" " required>
+            <label for="num_carte">Numéro de Carte</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="nom_carte" name="nom_carte" placeholder=" " required>
+            <label for="nom_carte">Nom sur la Carte</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="date_exp" name="date_exp" placeholder=" " required>
+            <label for="date_exp">Date d'Expiration</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="code_secu" name="code_secu" placeholder=" " required>
+            <label for="code_secu">Code de Sécurité</label>
+        </div>
+        <input type="submit" value="S'inscrire">
+    </form>
+</div>
+</body>
+</html>
